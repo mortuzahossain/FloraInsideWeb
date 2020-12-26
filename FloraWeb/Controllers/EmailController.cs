@@ -17,7 +17,7 @@ namespace FloraWeb.Controllers
     {
         [HttpPost]
 
-        public CommonResponse SendMail(string usermail, string Subject, string messageboddy)
+        public CommonResponse SendMail(string toAddress, string subject, string messageBody)
         {
 
 
@@ -32,38 +32,49 @@ namespace FloraWeb.Controllers
                 MailSettingsSectionGroup settings = (MailSettingsSectionGroup)config.GetSectionGroup("system.net/mailSettings");
 
                 MailMessage message = new MailMessage();
-                message.From = new MailAddress(settings.Smtp.From);
-                message.To.Add(usermail.Trim());
-                message.Subject = Subject;
-                message.Body = messageboddy;
-                message.IsBodyHtml = false;
-                SmtpClient client = new SmtpClient();//smtp.gmail.com 587
-                client.Host = hostIp = settings.Smtp.Network.Host;
-                client.Port = settings.Smtp.Network.Port;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(settings.Smtp.Network.UserName, settings.Smtp.Network.Password);
-                client.EnableSsl = settings.Smtp.Network.EnableSsl;
-                //client.EnableSsl = false;
-                try
+                if (settings != null)
                 {
-                    client.Send(message);
-
-                    return new CommonResponse
+                    message.From = new MailAddress(settings.Smtp.From);
+                    message.To.Add(toAddress.Trim());
+                    message.Subject = subject;
+                    message.Body = messageBody;
+                    message.IsBodyHtml = false;
+                    SmtpClient client = new SmtpClient(); //smtp.gmail.com 587
+                    client.Host = hostIp = settings.Smtp.Network.Host;
+                    client.Port = settings.Smtp.Network.Port;
+                    client.UseDefaultCredentials = false;
+                    client.Credentials =
+                        new NetworkCredential(settings.Smtp.Network.UserName, settings.Smtp.Network.Password);
+                    client.EnableSsl = settings.Smtp.Network.EnableSsl;
+                    //client.EnableSsl = false;
+                    try
                     {
-                        ResponseCode = Constants.ResponseCode.ResponseSuccess,
-                        ResponseMsg = Constants.ResponseMsg.ResponseSuccess
-                    };
+                        client.Send(message);
+
+                        return new CommonResponse
+                        {
+                            ResponseCode = Constants.ResponseCode.ResponseSuccess,
+                            ResponseMsg = Constants.ResponseMsg.ResponseSuccess
+                        };
+                    }
+                    catch (Exception ex)
+                    {
+                        return new CommonResponse
+                        {
+                            ResponseCode = Constants.ResponseCode.ResponseFailed,
+                            ResponseMsg = "Failed to send mail : Response from Host(" + hostIp + "):" +
+                                          ex.InnerException
+                        };
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
                     return new CommonResponse
                     {
                         ResponseCode = Constants.ResponseCode.ResponseFailed,
-                        ResponseMsg = "Failed to send mail : Response from Host(" + hostIp + "):" + ex.InnerException.ToString()
+                        ResponseMsg = "Mail setting not configured yet." 
                     };
-
                 }
-
             }
             catch (Exception exx)
             {
