@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FloraWeb.Entity;
+using FloraWeb.Models;
+using FloraWeb.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,82 +11,43 @@ namespace FloraWeb.Controllers
 {
     public class UsersController : Controller
     {
-        // GET: Users
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Login()
         {
+            if (Session["UserId"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
-        // GET: Users/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Users/Create
+        [ValidateAntiForgeryToken()]
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Login(LoginViewModel loginViewModel)
         {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var commonResponse = new UsersRepository().UsersLogin(loginViewModel);
 
-        // GET: Users/Edit/5
-        public ActionResult Edit(int id)
-        {
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess && commonResponse.ResponseData != null)
+            {
+                UserLogin users = (UserLogin)commonResponse.ResponseData;
+
+                Session["UserId"] = users.UserId;
+                Session["LoginId"] = users.LoginId;
+                Session["LoginName"] = users.LoginName;
+                Session["UserGroupName"] = users.UserGroupName;
+                Session["UserGroupId"] = users.UserGroupId;
+                return RedirectToAction("Index", "Home");
+
+            }
+            else
+            {
+                ViewBag.Error = "Invalid Username or password.";
+            }
+
             return View();
         }
 
-        // POST: Users/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Users/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

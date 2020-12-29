@@ -8,8 +8,14 @@ namespace FloraWeb.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             ViewBag.Title = "Home Page";
 
             return View();
