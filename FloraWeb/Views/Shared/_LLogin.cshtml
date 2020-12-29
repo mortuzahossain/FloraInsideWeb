@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="~/Assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="~/Assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Assets/plugins/toastr/toastr.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition login-page">
+    <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
             <b>Flora</b>Inside
@@ -20,9 +21,11 @@
             @RenderBody()
         </div>
     </div>
+
     <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
     <script src="~/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/dist/js/adminlte.min.js"></script>
-
+    <script src="~/Assets/plugins/toastr/toastr.min.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

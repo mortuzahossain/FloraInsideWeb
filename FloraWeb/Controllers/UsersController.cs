@@ -29,7 +29,8 @@ namespace FloraWeb.Controllers
 
             var commonResponse = new UsersRepository().UsersLogin(loginViewModel);
 
-            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess && commonResponse.ResponseData != null)
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess &&
+                commonResponse.ResponseData != null) 
             {
                 UserLogin users = (UserLogin)commonResponse.ResponseData;
 
@@ -38,13 +39,11 @@ namespace FloraWeb.Controllers
                 Session["LoginName"] = users.LoginName;
                 Session["UserGroupName"] = users.UserGroupName;
                 Session["UserGroupId"] = users.UserGroupId;
+                TempData["SuccessMessage"] = "Login successful.";
                 return RedirectToAction("Index", "Home");
+            }
 
-            }
-            else
-            {
-                ViewBag.Error = "Invalid Username or password.";
-            }
+            TempData["ErrorMessage"] = "Invalid Username or password.";
 
             return View();
         }

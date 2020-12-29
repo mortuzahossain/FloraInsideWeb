@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LLogin.cshtml";
+    var errorMessage = TempData["ErrorMessage"] ?? string.Empty;
 }
 
 
@@ -12,7 +13,7 @@
 
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken() 
+        @Html.AntiForgeryToken()
 
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="UserId" name="LoginId">
@@ -43,4 +44,11 @@
 
 </div>
 
-
+@section Scripts {
+    <script type="text/javascript">
+        var errorMessage = '@errorMessage';
+        if (errorMessage)
+            toastr.error(errorMessage);
+        
+    </script>
+}

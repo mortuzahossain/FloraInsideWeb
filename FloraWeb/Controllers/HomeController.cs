@@ -11,12 +11,12 @@ namespace FloraWeb.Controllers
 
         public ActionResult Index()
         {
-            if (Session["UserId"] == null)
-            {
-                return RedirectToAction("Login", "Users");
-            }
+            //if (Session["UserId"] == null)
+            //{
+            //    return RedirectToAction("Login", "Users");
+            //}
 
-            ViewBag.Title = "Home Page";
+            //TempData["SuccessMessage"] = TempData["SuccessMessage"];
 
             return View();
         }
