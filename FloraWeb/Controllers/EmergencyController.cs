@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FloraWeb.Entity;
+using FloraWeb.Models;
+using FloraWeb.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,57 +14,85 @@ namespace FloraWeb.Controllers
         // GET: Emergency
         public ActionResult Index()
         {
+            var commonResponse = new EmergencyRepository().GetAllEmergencyContact();
+
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess && commonResponse.ResponseData != null)
+            {
+                return View(commonResponse.ResponseData);
+            }else
+            {
+                TempData["ErrorMessage"] = commonResponse.ResponseMsg;
+            }
             return View();
         }
 
-        // GET: Emergency/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Emergency/Create
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Emergency/Create
+
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(EmergencyContactViewModel collection)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var commonResponse = new EmergencyRepository().AddEmergencyContact(collection);
 
-                return RedirectToAction("Index");
+                    if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
+                    {
+                        TempData["SuccessMessage"] = "Added successful.";
+                        return View();
+                    }
+
+                }
+
+                TempData["ErrorMessage"] = "Please try again.";
+                return View(collection);
             }
             catch
             {
-                return View();
+                return View(collection);
             }
         }
 
         // GET: Emergency/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var commonResponse = new EmergencyRepository().GetEmergencyContact(id);
+            EmergencyContactViewModel emergencyContact = null;
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess &&
+                    commonResponse.ResponseData != null)
+            {
+                emergencyContact = commonResponse.ResponseData as EmergencyContactViewModel;
+            }
+            return PartialView("_EditEmergencyPartial", emergencyContact);
         }
 
         // POST: Emergency/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(EmergencyContactViewModel emergencyContact)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            CommonResponse commonResponse = new EmergencyRepository().UpdateEmergencyContact(emergencyContact);
+
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
             {
-                return View();
+                TempData["SuccessMessage"] = commonResponse.ResponseMsg;
             }
+            else
+            {
+                TempData["ErrorMessage"] = commonResponse.ResponseMsg;
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: Emergency/Delete/5

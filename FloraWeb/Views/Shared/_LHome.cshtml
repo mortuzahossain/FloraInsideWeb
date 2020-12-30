@@ -13,6 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="~/Assets/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="~/Assets/plugins/toastr/toastr.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    @RenderSection("Styles", required: false)
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -33,15 +34,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
 
             <form class="form-inline ml-3">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
-                </form>
+                </div>
+            </form>
 
 
         </nav>
@@ -145,10 +146,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/UI/general.html" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Emergency Contacts</p>
+                                        <p>
+                                            Emergency Contacts
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/Emergency" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>All Emergency Contacts</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/Emergency/Create" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Add Emergency Contact</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
@@ -198,13 +216,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
     <script src="~/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/dist/js/adminlte.min.js"></script>
-<script src="~/Assets/plugins/toastr/toastr.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname + '"]').addClass('active');
-        $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname + '"]').parent().parent().parent().addClass('menu-open');
-    });
-</script>
+    <script src="~/Assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/Assets/plugins/toastr/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname.replace(/\/$/, "").replace('/Index','') + '"]').addClass('active');
+            $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname.replace(/\/$/, "").replace('/Index','') + '"]').parent().parent().parent().addClass('menu-open');
+            $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname.replace(/\/$/, "").replace('/Index','') + '"]').parent().parent().parent().parent().parent().addClass('menu-open');
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -67,21 +67,28 @@ namespace FloraWeb.Database
             using (SqlConnection _cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB_CONNECTION"].ConnectionString))
             {
 
-                _cnn.Open();
-                SqlCommand cmd = new SqlCommand(spName, _cnn) { CommandType = CommandType.StoredProcedure };
-                if (objects != null)
+                DataTable dataTable = new DataTable();
+                try
                 {
-
-                    foreach (var o in objects)
+                    _cnn.Open();
+                    SqlCommand cmd = new SqlCommand(spName, _cnn) { CommandType = CommandType.StoredProcedure };
+                    if (objects != null)
                     {
-                        cmd.Parameters.AddWithValue(o.Key, o.Value);
+
+                        foreach (var o in objects)
+                        {
+                            cmd.Parameters.AddWithValue(o.Key, o.Value);
+                        }
                     }
+
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+                    sqlDataAdapter.Fill(dataTable);
+                    _cnn.Close();
+                }
+                catch
+                {
                 }
 
-                DataTable dataTable = new DataTable();
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
-                sqlDataAdapter.Fill(dataTable);
-                _cnn.Close();
                 return dataTable;
             }
         }

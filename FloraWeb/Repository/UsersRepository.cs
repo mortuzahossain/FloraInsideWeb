@@ -1,6 +1,7 @@
 ﻿using FloraWeb.Database;
 using FloraWeb.Entity;
 using FloraWeb.Models;
+using FloraWeb.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,18 +11,6 @@ namespace FloraWeb.Repository
 {
     public class UsersRepository
     {
-        public string Hash(string password)
-        {
-            var bytes = new UTF8Encoding().GetBytes(password);
-            byte[] hashBytes;
-            using (var algorithm = new System.Security.Cryptography.SHA512Managed())
-            {
-                hashBytes = algorithm.ComputeHash(bytes);
-            }
-
-            return Convert.ToBase64String(hashBytes);
-        }
-
         public CommonResponse UsersLogin(LoginViewModel loginViewModel)
         {
             CommonResponse commonResponse = new CommonResponse();
@@ -29,7 +18,7 @@ namespace FloraWeb.Repository
             List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
             {
                 new CommonKeyValueObject() {Key = "LoginId", Value = loginViewModel.LoginId},
-                new CommonKeyValueObject() {Key = "Password", Value = Hash(loginViewModel.Password)},
+                new CommonKeyValueObject() {Key = "Password", Value = SecurityUtility.Hash(loginViewModel.Password)},
             };
 
             DataTable dataTable = procedureManager.ExecuteSpGetDataTable("sp_Get_User_By_Email", objects);

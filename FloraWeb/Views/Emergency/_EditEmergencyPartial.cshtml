@@ -1,0 +1,51 @@
+﻿@model FloraWeb.Models.EmergencyContactViewModel
+@using (Ajax.BeginForm("Edit", "Emergency", FormMethod.Post,
+                    new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "POST",
+                        UpdateTargetId = "list-of-people"
+                    },new { Class="form-horizontal"}))
+{
+    @Html.ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Edit Emergency Contacts</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <input type="text" name="Name" class="form-control col-sm-10" id="Name" placeholder="Enter Name" value="@Model.Name">
+            </div>
+
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">DisplayName</label>
+                <input type="text" name="DisplayName" class="form-control col-sm-10" id="DisplayName" placeholder="Enter DisplayName" value="@Model.DisplayName">
+            </div>
+
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">ContactNumber</label>
+                <input type="text" name="ContactNumber" class="form-control col-sm-10" id="ContactNumber" placeholder="Enter ContactNumber" value="@Model.ContactNumber">
+            </div>
+
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Descriptions</label>
+                <input type="text" name="Descriptions" class="form-control col-sm-10" id="Descriptions" placeholder="Enter Descriptions" value="@Model.Descriptions">
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+    </div>
+
+
+}

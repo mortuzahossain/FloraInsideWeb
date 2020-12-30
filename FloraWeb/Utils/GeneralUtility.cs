@@ -1,22 +1,16 @@
-﻿using FloraWeb.Entity;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Web;
+using FloraWeb.Entity;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Configuration;
-using System.Net.Http;
 using System.Net.Mail;
-using System.Web;
 using System.Web.Configuration;
-using System.Web.Http;
 
-namespace FloraWeb.Controllers
+namespace FloraWeb.Utils
 {
-    public class EmailController : ApiController
+    public class GeneralUtility
     {
-        [HttpPost]
-
         public CommonResponse SendMail(string toAddress, string subject, string messageBody)
         {
 
@@ -72,7 +66,7 @@ namespace FloraWeb.Controllers
                     return new CommonResponse
                     {
                         ResponseCode = Constants.ResponseCode.ResponseFailed,
-                        ResponseMsg = "Mail setting not configured yet." 
+                        ResponseMsg = "Mail setting not configured yet."
                     };
                 }
             }
@@ -85,8 +79,7 @@ namespace FloraWeb.Controllers
                 };
             }
         }
+
+
     }
-
-
-
 }

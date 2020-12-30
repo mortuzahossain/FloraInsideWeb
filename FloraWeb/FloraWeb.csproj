@@ -158,7 +158,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ClientTypeController.cs" />
-    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\EmergencyController.cs" />
     <Compile Include="Controllers\FaqController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -175,6 +174,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmergencyContactViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +183,8 @@
     <Compile Include="Repository\FaqRepository.cs" />
     <Compile Include="Repository\NoticeRepository.cs" />
     <Compile Include="Repository\UsersRepository.cs" />
+    <Compile Include="Utils\GeneralUtility.cs" />
+    <Compile Include="Utils\SecurityUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -2149,10 +2151,12 @@
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Shared\_LHome.cshtml" />
     <Content Include="Views\ClientType\Index.cshtml" />
+    <Content Include="Views\Emergency\Create.cshtml" />
+    <Content Include="Views\Emergency\Index.cshtml" />
+    <Content Include="Views\Emergency\_EditEmergencyPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Emergency\" />
     <Folder Include="Views\Faq\" />
     <Folder Include="Views\Notice\" />
   </ItemGroup>
