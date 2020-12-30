@@ -172,5 +172,28 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
+        public CommonResponse DeactieveEmergencyContact(EmergencyContactViewModel emergencyContact)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+
+            try
+            {
+
+                List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+                {
+                    new CommonKeyValueObject() {Key = "Id", Value =  emergencyContact.Id}
+                };
+
+                commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_Cont_EmergencyContacts_Deactieve", objects);
+
+            }
+            catch (Exception exception)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = exception.Message;
+            }
+
+            return commonResponse;
+        }
     }
 }

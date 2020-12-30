@@ -220,6 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="~/Assets/plugins/toastr/toastr.min.js"></script>
     <script>
         $(document).ready(function () {
+            $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname.replace('/Index','') + '"]').addClass('active');
             $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname.replace(/\/$/, "").replace('/Index','') + '"]').addClass('active');
             $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname.replace(/\/$/, "").replace('/Index','') + '"]').parent().parent().parent().addClass('menu-open');
             $('.nav.nav-pills.nav-sidebar.flex-column').find('[href="' + window.location.pathname.replace(/\/$/, "").replace('/Index','') + '"]').parent().parent().parent().parent().parent().addClass('menu-open');

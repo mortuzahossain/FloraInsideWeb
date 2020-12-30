@@ -2154,6 +2154,7 @@
     <Content Include="Views\Emergency\Create.cshtml" />
     <Content Include="Views\Emergency\Index.cshtml" />
     <Content Include="Views\Emergency\_EditEmergencyPartial.cshtml" />
+    <Content Include="Views\Emergency\_DeleteEmergencyPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

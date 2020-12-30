@@ -19,10 +19,11 @@ namespace FloraWeb.Controllers
             if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess && commonResponse.ResponseData != null)
             {
                 return View(commonResponse.ResponseData);
-            }else
-            {
-                TempData["ErrorMessage"] = commonResponse.ResponseMsg;
             }
+            //else
+            //{
+            //    TempData["ErrorMessage"] = commonResponse.ResponseMsg;
+            //}
             return View();
         }
 
@@ -96,25 +97,26 @@ namespace FloraWeb.Controllers
         }
 
         // GET: Emergency/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            return PartialView("_DeleteEmergencyPartial", new EmergencyContactViewModel() { Id = id});
         }
 
         // POST: Emergency/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(EmergencyContactViewModel emergencyContact)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            CommonResponse commonResponse = new EmergencyRepository().DeactieveEmergencyContact(emergencyContact);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
             {
-                return View();
+                TempData["SuccessMessage"] = commonResponse.ResponseMsg;
             }
+            else
+            {
+                TempData["ErrorMessage"] = commonResponse.ResponseMsg;
+            }
+            return RedirectToAction("Index");
         }
     }
 }

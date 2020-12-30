@@ -44,7 +44,10 @@
                                                         <td>@item.DisplayName</td>
                                                         <td>@item.ContactNumber</td>
                                                         <td>@item.Descriptions</td>
-                                                        <td class="text-center"><button type="button" class="btn btn-default edit-emergency" data-toggle="modal" data-target="#modal-lg" data-id="@item.Id"><i class="fas fa-edit"></i></button></td>
+                                                        <td class="text-center">
+                                                            <button type="button" class="btn btn-default edit-emergency" data-toggle="modal" data-target="#modal-lg" data-id="@item.Id"><i class="fas fa-edit"></i></button>
+                                                            <button type="button" class="btn btn-default delete-emergency" data-toggle="modal" data-target="#modal-danger" data-id="@item.Id"><i class="fas fa-trash-alt"></i></button>
+                                                        </td>
                                                     </tr>
 
                                                 }
@@ -70,10 +73,17 @@
 
 <div class="modal fade" id="modal-lg">
     <div class="modal-dialog modal-lg">
-        
+
     </div>
 </div>
 
+
+
+<div class="modal fade" id="modal-danger">
+    <div class="modal-dialog">
+
+    </div>
+</div>
 
 
 
@@ -91,13 +101,22 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
+            
              $('.edit-emergency').click(function () {
                 var url = "/Emergency/Edit"; // the url to the controller
                 var id = $(this).attr('data-id'); // the id that's given to each button in the list
                 $.get(url + '/' + id, function (data) {
                     $('#modal-lg').html(data);
                     $('#modal-lg').modal('show');
+                });
+            });
+
+             $('.delete-emergency').click(function () {
+                var url = "/Emergency/Delete"; // the url to the controller
+                var id = $(this).attr('data-id'); // the id that's given to each button in the list
+                $.get(url + '/' + id, function (data) {
+                    $('#modal-danger').html(data);
+                    $('#modal-danger').modal('show');
                 });
             });
 
