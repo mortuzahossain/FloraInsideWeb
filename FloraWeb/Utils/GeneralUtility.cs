@@ -11,7 +11,7 @@ namespace FloraWeb.Utils
 {
     public class GeneralUtility
     {
-        public CommonResponse SendMail(string toAddress, string subject, string messageBody)
+        public static CommonResponse SendMail(string toAddress, string subject, string messageBody)
         {
 
 

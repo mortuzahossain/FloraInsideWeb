@@ -171,12 +171,14 @@
     <Compile Include="Entity\CommonResponse.cs" />
     <Compile Include="Entity\Constants.cs" />
     <Compile Include="Entity\EnumBloodGroup.cs" />
+    <Compile Include="Entity\UserGroup.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EmergencyContactViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ConvinceBillRepository.cs" />
     <Compile Include="Repository\EmergencyRepository.cs" />
@@ -2155,6 +2157,7 @@
     <Content Include="Views\Emergency\Index.cshtml" />
     <Content Include="Views\Emergency\_EditEmergencyPartial.cshtml" />
     <Content Include="Views\Emergency\_DeleteEmergencyPartial.cshtml" />
+    <Content Include="Views\Users\AddUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

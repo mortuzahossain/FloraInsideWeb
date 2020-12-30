@@ -1,0 +1,194 @@
+USE [FloraERP]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_In_Cont_EmergencyContacts]    Script Date: 12/30/2020 6:03:11 PM ******/
+DROP PROCEDURE [dbo].[sp_In_Cont_EmergencyContacts]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Get_Cont_EmergencyContactsById]    Script Date: 12/30/2020 6:03:11 PM ******/
+DROP PROCEDURE [dbo].[sp_Get_Cont_EmergencyContactsById]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Up_Cont_EmergencyContacts_Deactieve]    Script Date: 12/30/2020 6:03:11 PM ******/
+DROP PROCEDURE [dbo].[sp_Up_Cont_EmergencyContacts_Deactieve]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_In_UserLogin]    Script Date: 12/30/2020 6:03:11 PM ******/
+DROP PROCEDURE [dbo].[sp_In_UserLogin]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_In_UserLogin]    Script Date: 12/30/2020 6:03:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Mortuza Hossain
+-- Create date: 2020-12-29
+-- Description:	<Description,,>
+-- =============================================
+
+-- exec sp_In_UserLogin 'Mortuza Hossain','admin','PJkJr+wlNU1VHa4hWQuybjjVPyFzuNPcPu5MBH56scHri4UQPjvnumE7MbtcnDYhTcnxSkL9ei/bhIVrylxEwg==',1
+
+CREATE PROCEDURE [dbo].[sp_In_UserLogin]
+	@Email varchar(50),
+	@LoginName  varchar(50),
+    @LoginId  varchar(50),
+    @Password  varchar(300),
+    @UserGroupId  int,
+    @IsLogin  int = 0,
+    @IsLogOut int = 0,
+    @LatLan varchar(44) = '',
+	@Status int = 1
+
+AS
+BEGIN
+	if not exists(select UserId from UserLogin where LoginId = @LoginId)
+	begin
+
+		declare @UserId int
+		select @UserId = (isnull(max(UserId),0)+1) from UserLogin 
+
+		
+		Insert into UsersProfile (UserId,Name,Email) Values (@UserId,@LoginName,@Email)
+
+		INSERT INTO [dbo].[UserLogin]
+			   ([UserId]
+			   ,[LoginName]
+			   ,[LoginId]
+			   ,[Password]
+			   ,[UserGroupId]
+			   ,[CreateDate]
+			   ,[IsLogin]
+			   ,[LoginTime]
+			   ,[IsLogOut]
+			   ,[LogOutTime]
+			   ,[LatLan]
+			   ,[Status])
+		 VALUES
+			   (@UserId
+			   ,@LoginName
+			   ,@LoginId
+			   ,@Password
+			   ,@UserGroupId
+			   ,GETDATE()
+			   ,@IsLogin
+			   ,GETDATE()
+			   ,@IsLogOut
+			   ,GETDATE()
+			   ,@LatLan
+			   ,@Status)
+
+
+	end
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Up_Cont_EmergencyContacts_Deactieve]    Script Date: 12/30/2020 6:03:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Mortuza Hossain
+-- Create date: 20201229
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Up_Cont_EmergencyContacts_Deactieve] 
+	@Id int,
+    @Status int = 0
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+   
+
+	UPDATE [dbo].[Cont_EmergencyContacts]
+	   SET 
+		  [Status] = @Status 
+	 WHERE Id = @Id
+
+
+
+
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_Get_Cont_EmergencyContactsById]    Script Date: 12/30/2020 6:03:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Md Mortuza Hossain
+-- Create date: 2020-12-30
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Get_Cont_EmergencyContactsById]
+	@Id int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    SELECT Id,Name,DisplayName,ContactNumber,Descriptions from Cont_EmergencyContacts where Status = 1 and Id = @Id
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_In_Cont_EmergencyContacts]    Script Date: 12/30/2020 6:03:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Md Mortuza Hossain
+-- Create date: 20201229
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_In_Cont_EmergencyContacts]
+	@Name  nvarchar(50),
+    @DisplayName nvarchar(50),
+    @ContactNumber varchar(15),
+    @Descriptions nvarchar(max),
+    @Status int = 1
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	declare @Id int
+	select @Id = (isnull(max(Id),0)+1) from Cont_EmergencyContacts
+
+
+	INSERT INTO [dbo].[Cont_EmergencyContacts]
+           ([Id]
+           ,[Name]
+           ,[DisplayName]
+           ,[ContactNumber]
+           ,[Descriptions]
+           ,[Status]
+           ,[CreatedDate])
+     VALUES
+           (@Id
+           ,@Name
+           ,@DisplayName
+           ,@ContactNumber
+           ,@Descriptions
+           ,@Status
+           ,GETDATE())
+
+
+END
+GO
+

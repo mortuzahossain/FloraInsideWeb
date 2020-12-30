@@ -70,7 +70,103 @@ namespace FloraWeb.Repository
             return commonResponse;
         }
 
+        public CommonResponse GetAllUserGroup()
+        {
+            CommonResponse commonResponse = new CommonResponse();
+            SqlProcedureManager procedureManager = SqlProcedureManager.Instance();
+            DataTable dataTable = procedureManager.ExecuteSpGetDataTable("sp_Get_Param_UserGroup");
+            var userGroups = new List<UserGroup>();
+            try
+            {
+                if (dataTable != null)
+                {
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            UserGroup userGroup = new UserGroup()
+                            {
+                                Id = (int)dataTable.Rows[i]["Id"],
+                                Name = dataTable.Rows[i]["Name"].ToString().Trim(),
 
+                            };
+                            userGroups.Add(userGroup);
+                        }
+
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseSuccess;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseSuccess;
+                        commonResponse.ResponseData = userGroups;
+
+                    }
+                    else
+                    {
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+
+                    }
+                }
+                else
+                {
+                    commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                    commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+                }
+            }
+            catch (Exception ex)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = ex.Message;
+            }
+
+            return commonResponse;
+        }
+
+        public CommonResponse AddUsers(UserViewModel userLogin)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+
+            try
+            {
+
+                // Generate Password
+
+                string passwordPlain = SecurityUtility.RandomString(8);
+                string password = SecurityUtility.Hash(passwordPlain);
+                
+
+                // Save User Into database
+                List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+                {
+                    new CommonKeyValueObject() {Key = "Email", Value = userLogin.Email},
+                    new CommonKeyValueObject() {Key = "LoginName", Value = userLogin.LoginName},
+                    new CommonKeyValueObject() {Key = "LoginId", Value = userLogin.LoginId},
+                    new CommonKeyValueObject() {Key = "UserGroupId", Value = userLogin.UserGroupId},
+                    new CommonKeyValueObject() {Key = "Password", Value = password}
+                };
+
+                commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_In_UserLogin", objects);
+
+
+                // Send password using email
+                if(commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
+                {
+                    string subject = "Flora Inside Login Credentials";
+                    string content = "Dear [name],"+Environment.NewLine+ "Welcome to Flora System Ltd.Your login credential:" + Environment.NewLine + "Login Id: [loginid]" + Environment.NewLine + "Password: [password]" + Environment.NewLine + "Regards" + Environment.NewLine + "Flora System ltd";
+                    content = content.Replace("[name]", userLogin.LoginName);
+                    content = content.Replace("[loginid]", userLogin.LoginId);
+                    content = content.Replace("[password]", passwordPlain);
+                    commonResponse = GeneralUtility.SendMail(userLogin.Email, subject, content);
+                }
+
+
+            }
+            catch (Exception exception)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = exception.Message;
+            }
+
+            return commonResponse;
+        }
 
     }
 }

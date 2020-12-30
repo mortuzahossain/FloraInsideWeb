@@ -48,5 +48,38 @@ namespace FloraWeb.Controllers
             return View();
         }
 
+
+        public ActionResult AddUser()
+        {
+            TempData["SuccessMessage"] = TempData["SuccessMessage"];
+            var commonResponse = new UsersRepository().GetAllUserGroup();
+
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess && commonResponse.ResponseData != null)
+            {
+                return View(new UserViewModel() { UserGroupList = (List<UserGroup>)commonResponse.ResponseData });
+            }
+
+            return View();
+        }
+
+        [ValidateAntiForgeryToken()]
+        [HttpPost]
+        public ActionResult AddUser(UserViewModel loginViewModel)
+        {
+
+            var commonResponse = new UsersRepository().AddUsers(loginViewModel);
+
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
+            {
+                TempData["SuccessMessage"] = "User added successful.";
+                return RedirectToAction("AddUser");
+            }
+            loginViewModel.UserGroupList = new UsersRepository().GetAllUserGroup().ResponseData as List<UserGroup>;
+            TempData["ErrorMessage"] = "Failed to add user. Please try with new user id and email id.";
+            return View(loginViewModel);
+        }
+
+
+
     }
 }

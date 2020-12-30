@@ -39,7 +39,7 @@ namespace FloraWeb.Database
                     _cnn.Open();
                     int k = cmd.ExecuteNonQuery();
 
-                    if (k != 0)
+                    if (k > 0)
                     {
                         commonResponse.ResponseCode = Constants.ResponseCode.ResponseSuccess;
                         commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseSuccess;
