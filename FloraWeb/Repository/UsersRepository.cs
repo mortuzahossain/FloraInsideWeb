@@ -69,7 +69,6 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
-
         public CommonResponse AddUsers(UserViewModel userLogin)
         {
             CommonResponse commonResponse = new CommonResponse();
@@ -107,6 +106,67 @@ namespace FloraWeb.Repository
                     GeneralUtility.SendMail(userLogin.Email, subject, content);
                 }
 
+
+            }
+            catch (Exception exception)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = exception.Message;
+            }
+
+            return commonResponse;
+        }
+        public CommonResponse UpdateUsersProfile(UserProfile userProfile)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+
+            try
+            {
+
+                List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+                {
+                    new CommonKeyValueObject() {Key = "UserId", Value =  userProfile.UserId},
+                    new CommonKeyValueObject() {Key = "Name", Value = userProfile.Name},
+                    new CommonKeyValueObject() {Key = "Email", Value = userProfile.Email},
+                    new CommonKeyValueObject() {Key = "ContactNumber", Value = userProfile.Phone},
+                    new CommonKeyValueObject() {Key = "BloodGroup", Value = userProfile.BloodGroup},
+                    new CommonKeyValueObject() {Key = "MaritialStatus", Value = userProfile.MaritialStatus},
+                    new CommonKeyValueObject() {Key = "Department", Value = userProfile.Department},
+                    new CommonKeyValueObject() {Key = "PresentAddress", Value = userProfile.PresentAddress},
+                    new CommonKeyValueObject() {Key = "PermanentAddress", Value = userProfile.PermanentAddress},
+                    new CommonKeyValueObject() {Key = "EmergencyContact", Value = userProfile.EmergencyContact},
+                    new CommonKeyValueObject() {Key = "Status", Value = userProfile.Status},
+                    new CommonKeyValueObject() {Key = "JoiningDate", Value = userProfile.JoiningDate},
+                    new CommonKeyValueObject() {Key = "FireId", Value = userProfile.FireId},
+                    new CommonKeyValueObject() {Key = "Nid", Value = userProfile.Nid},
+                    new CommonKeyValueObject() {Key = "AccountStatus", Value = userProfile.AccountStatus}
+                };
+
+                commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_UserProfile", objects);
+
+            }
+            catch (Exception exception)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = exception.Message;
+            }
+
+            return commonResponse;
+        }
+        public CommonResponse UpdateUsersProfileImage(UserProfile userProfile)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+
+            try
+            {
+
+                List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+                {
+                    new CommonKeyValueObject() {Key = "UserId", Value =  userProfile.UserId},
+                    new CommonKeyValueObject() {Key = "Image", Value = userProfile.Image}
+                };
+
+                commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_UserProfileImage", objects);
 
             }
             catch (Exception exception)

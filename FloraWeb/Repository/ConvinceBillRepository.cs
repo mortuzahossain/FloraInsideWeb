@@ -7,7 +7,6 @@ namespace FloraWeb.Repository
 {
     public class ConvinceBillRepository
     {
-
         public CommonResponse AddTourInRegister(TourRegister tourRegister)
         {
             CommonResponse commonResponse = new CommonResponse();

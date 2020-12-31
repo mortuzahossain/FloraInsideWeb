@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [FloraERP]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Database [FloraERP]    Script Date: 12/31/2020 5:07:02 PM ******/
 CREATE DATABASE [FloraERP]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,7 +80,7 @@ ALTER DATABASE [FloraERP] SET QUERY_STORE = OFF
 GO
 USE [FloraERP]
 GO
-/****** Object:  Table [dbo].[Cont_EmergencyContacts]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[Cont_EmergencyContacts]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -99,7 +99,7 @@ CREATE TABLE [dbo].[Cont_EmergencyContacts](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Conv_TourRegister]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[Conv_TourRegister]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -137,7 +137,7 @@ CREATE TABLE [dbo].[Conv_TourRegister](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Faqs]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[Faqs]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,7 +156,7 @@ CREATE TABLE [dbo].[Faqs](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Param_Client]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[Param_Client]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -182,7 +182,7 @@ CREATE TABLE [dbo].[Param_Client](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Param_ClientType]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[Param_ClientType]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,7 +197,7 @@ CREATE TABLE [dbo].[Param_ClientType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Param_JourneyBy]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[Param_JourneyBy]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -207,7 +207,7 @@ CREATE TABLE [dbo].[Param_JourneyBy](
 	[Name] [varchar](150) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Param_Project]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[Param_Project]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -222,7 +222,7 @@ CREATE TABLE [dbo].[Param_Project](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Param_UserGroup]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[Param_UserGroup]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -236,7 +236,7 @@ CREATE TABLE [dbo].[Param_UserGroup](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserLogin]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[UserLogin]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -260,7 +260,7 @@ CREATE TABLE [dbo].[UserLogin](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UsersProfile]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  Table [dbo].[UsersProfile]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -282,7 +282,7 @@ CREATE TABLE [dbo].[UsersProfile](
 	[JoiningDate] [datetime] NULL,
 	[FireId] [varchar](max) NULL,
 	[Nid] [varchar](15) NULL,
-	[AccountStatus] [int] NULL,
+	[AccountStatus] [varchar](max) NULL,
  CONSTRAINT [PK_Users_1] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC
@@ -319,7 +319,29 @@ REFERENCES [dbo].[UsersProfile] ([UserId])
 GO
 ALTER TABLE [dbo].[UserLogin] CHECK CONSTRAINT [FK_UserLogin_UsersProfile]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DL_Param_Client]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_DL_Faqs]    Script Date: 12/31/2020 5:07:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mortuza Hossain
+-- Create date: 20201229
+-- Description:	<Description,,>
+-- =============================================
+create PROCEDURE [dbo].[sp_DL_Faqs]
+	@Id int
+AS
+BEGIN
+	
+	DELETE FROM [dbo].[Faqs]
+	WHERE Id = @Id
+
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_DL_Param_Client]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -344,7 +366,7 @@ BEGIN
     
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DL_Param_ClientType]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_DL_Param_ClientType]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -365,7 +387,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DL_Param_JourneyBy]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_DL_Param_JourneyBy]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -389,7 +411,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DL_Param_Project]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_DL_Param_Project]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -407,7 +429,7 @@ BEGIN
 	WHERE Id = @Id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DL_Param_UserGroup]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_DL_Param_UserGroup]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -431,7 +453,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Cont_EmergencyContacts]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Cont_EmergencyContacts]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -448,7 +470,7 @@ BEGIN
 	SELECT Id,Name,DisplayName,ContactNumber,Descriptions from Cont_EmergencyContacts where Status = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Cont_EmergencyContactsById]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Cont_EmergencyContactsById]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -465,7 +487,29 @@ BEGIN
     SELECT Id,Name,DisplayName,ContactNumber,Descriptions from Cont_EmergencyContacts where Status = 1 and Id = @Id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Faqs]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_FaqById]    Script Date: 12/31/2020 5:07:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mortuza Hossain
+-- Create date: 2020-12-29
+-- Description:	<Description,,>
+-- =============================================
+create PROCEDURE [dbo].[sp_Get_FaqById]
+	@Id int
+AS
+BEGIN
+	
+
+   select f.*,p.Name as ProjectName from Faqs f,Param_Project p
+   where p.Id = f.ProjectId and f.Status = 1 and f.Id = @Id
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Get_Faqs]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -487,7 +531,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_Client]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_Client]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -508,7 +552,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_ClientById]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_ClientById]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -529,7 +573,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_ClientType]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_ClientType]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -556,7 +600,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_ClientTypeById]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_ClientTypeById]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -583,7 +627,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_Param_JourneyBy]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_Param_JourneyBy]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -602,7 +646,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_Param_JourneyById]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_Param_JourneyById]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -622,7 +666,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_Project]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_Project]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -641,7 +685,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_ProjectById]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_ProjectById]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -661,7 +705,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_UserGroup]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_UserGroup]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -680,7 +724,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_Param_UserGroupById]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_Param_UserGroupById]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -700,7 +744,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Get_User_By_Email]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Get_User_By_Email]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -721,7 +765,7 @@ BEGIN
 	where LoginId= @LoginId and Password = @Password and Status = 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_Cont_EmergencyContacts]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_Cont_EmergencyContacts]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -764,7 +808,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_Conv_TourRegister]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_Conv_TourRegister]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -836,7 +880,7 @@ BEGIN
 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_Faqs]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_Faqs]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -884,7 +928,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_Param_Client]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_Param_Client]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -954,7 +998,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_Param_ClientType]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_Param_ClientType]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -991,7 +1035,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_Param_JourneyBy]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_Param_JourneyBy]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1021,7 +1065,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_Param_Project]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_Param_Project]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1054,7 +1098,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_Param_UserGroup]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_Param_UserGroup]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1084,7 +1128,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_In_UserLogin]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_In_UserLogin]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1150,7 +1194,7 @@ BEGIN
 	end
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_Cont_EmergencyContacts]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_Cont_EmergencyContacts]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1183,7 +1227,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_Cont_EmergencyContacts_Deactieve]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_Cont_EmergencyContacts_Deactieve]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1211,7 +1255,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_Faqs]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_Faqs]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1244,7 +1288,41 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_Param_Client]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_FaqVote]    Script Date: 12/31/2020 5:07:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mortuza Hossain
+-- Create date: 2020-12-31
+-- Description:	<Description,,>
+-- =============================================
+create PROCEDURE [dbo].[sp_Up_FaqVote]
+	@Id int,
+    @UpVote int
+AS
+BEGIN
+	
+
+	if @UpVote = 1
+	begin
+		UPDATE [dbo].[Faqs]
+		   SET 
+			  [UpVote] = (select UpVote+1 from Faqs)
+		 WHERE Id = @Id
+	 end
+	 else
+	 begin
+		UPDATE [dbo].[Faqs]
+		   SET 
+			  [UpVote] = (select DownVote+1 from Faqs)
+		 WHERE Id = @Id
+	 end
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Up_Param_Client]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1294,7 +1372,7 @@ BEGIN
     
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_Param_ClientType]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_Param_ClientType]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1320,7 +1398,7 @@ BEGIN
     
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_Param_JourneyBy]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_Param_JourneyBy]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1346,7 +1424,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_Param_Project]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_Param_Project]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1376,7 +1454,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_Param_UserGroup]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_Param_UserGroup]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1402,7 +1480,89 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Up_UsersProfile]    Script Date: 12/31/2020 3:55:09 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_Up_UserProfile]    Script Date: 12/31/2020 5:07:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mortuza Hossain
+-- Create date: 2020-12-31
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Up_UserProfile]
+	  @UserId int,
+      @Name varchar(50),
+      @Email varchar(50),
+      @Phone varchar(15),
+      @BloodGroup varchar(3),
+      @MaritialStatus varchar(1),
+      @Designation varchar(50),
+      @Department varchar(50),
+      @PresentAddress varchar(max),
+      @PermanentAddress varchar(max),
+      @EmergencyContact varchar(15),
+      @JoiningDate datetime,
+      @FireId varchar(max),
+      @Nid varchar(15),
+      @AccountStatus varchar(max)
+AS
+BEGIN
+
+
+	UPDATE [dbo].[UserLogin]
+	   SET 
+		  [LoginName] = @Name
+	 WHERE  UserId = @UserId
+
+
+
+	UPDATE [dbo].[UsersProfile]
+	   SET [Name] = @Name
+		  ,[Email] = @Email
+		  ,[Phone] = @Phone
+		  ,[BloodGroup] = @BloodGroup
+		  ,[MaritialStatus] = @MaritialStatus
+		  ,[Designation] = @Designation
+		  ,[Department] = @Department
+		  ,[PresentAddress] = @PresentAddress
+		  ,[PermanentAddress] = @PermanentAddress
+		  ,[EmergencyContact] = @EmergencyContact
+		  ,[JoiningDate] = @JoiningDate
+		  ,[FireId] = @FireId
+		  ,[Nid] = @Nid
+		  ,[AccountStatus] = @AccountStatus
+	 WHERE UserId = @UserId
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Up_UserProfileImage]    Script Date: 12/31/2020 5:07:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mortuza Hossain
+-- Create date: 2020-12-31
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Up_UserProfileImage]
+	  @UserId int,
+      @Image varchar(50)
+      
+AS
+BEGIN
+
+
+	UPDATE [dbo].[UsersProfile]
+	   SET [Name] = @Image
+	 WHERE UserId = @UserId
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Up_UsersProfile]    Script Date: 12/31/2020 5:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

@@ -173,10 +173,12 @@
     <Compile Include="Entity\CommonResponse.cs" />
     <Compile Include="Entity\Constants.cs" />
     <Compile Include="Entity\EnumBloodGroup.cs" />
+    <Compile Include="Entity\Faq.cs" />
     <Compile Include="Entity\JourneyBy.cs" />
     <Compile Include="Entity\Project.cs" />
     <Compile Include="Entity\TourRegister.cs" />
     <Compile Include="Entity\UserGroup.cs" />
+    <Compile Include="Entity\UserProfile.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
