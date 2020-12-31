@@ -14,6 +14,10 @@ namespace FloraWeb.Controllers
         // GET: Emergency
         public ActionResult Index()
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             var commonResponse = new EmergencyRepository().GetAllEmergencyContact();
 
             if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess && commonResponse.ResponseData != null)
@@ -35,6 +39,10 @@ namespace FloraWeb.Controllers
 
         public ActionResult Create()
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             return View();
         }
 
@@ -42,6 +50,10 @@ namespace FloraWeb.Controllers
         [HttpPost]
         public ActionResult Create(EmergencyContactViewModel collection)
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             try
             {
                 if (ModelState.IsValid)
@@ -68,6 +80,10 @@ namespace FloraWeb.Controllers
         // GET: Emergency/Edit/5
         public ActionResult Edit(string id)
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             var commonResponse = new EmergencyRepository().GetEmergencyContact(id);
             EmergencyContactViewModel emergencyContact = null;
             if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess &&
@@ -82,7 +98,10 @@ namespace FloraWeb.Controllers
         [HttpPost]
         public ActionResult Edit(EmergencyContactViewModel emergencyContact)
         {
-
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             CommonResponse commonResponse = new EmergencyRepository().UpdateEmergencyContact(emergencyContact);
 
             if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
@@ -99,6 +118,10 @@ namespace FloraWeb.Controllers
         // GET: Emergency/Delete/5
         public ActionResult Delete(string id)
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             return PartialView("_DeleteEmergencyPartial", new EmergencyContactViewModel() { Id = id});
         }
 
@@ -106,6 +129,10 @@ namespace FloraWeb.Controllers
         [HttpPost]
         public ActionResult Delete(EmergencyContactViewModel emergencyContact)
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             CommonResponse commonResponse = new EmergencyRepository().DeactieveEmergencyContact(emergencyContact);
 
             if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)

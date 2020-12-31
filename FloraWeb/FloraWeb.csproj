@@ -166,11 +166,16 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Database\SqlProcedureManager.cs" />
     <Compile Include="Database\SqlQueryManager.cs" />
+    <Compile Include="Entity\Client.cs" />
+    <Compile Include="Entity\ClientType.cs" />
     <Compile Include="Entity\CommonKeyValueObject.cs" />
     <Compile Include="Entity\CommonRequest.cs" />
     <Compile Include="Entity\CommonResponse.cs" />
     <Compile Include="Entity\Constants.cs" />
     <Compile Include="Entity\EnumBloodGroup.cs" />
+    <Compile Include="Entity\JourneyBy.cs" />
+    <Compile Include="Entity\Project.cs" />
+    <Compile Include="Entity\TourRegister.cs" />
     <Compile Include="Entity\UserGroup.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,6 +189,7 @@
     <Compile Include="Repository\EmergencyRepository.cs" />
     <Compile Include="Repository\FaqRepository.cs" />
     <Compile Include="Repository\NoticeRepository.cs" />
+    <Compile Include="Repository\ParameterRepository.cs" />
     <Compile Include="Repository\UsersRepository.cs" />
     <Compile Include="Utils\GeneralUtility.cs" />
     <Compile Include="Utils\SecurityUtility.cs" />

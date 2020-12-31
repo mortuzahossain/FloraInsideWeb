@@ -61,7 +61,6 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
-
         public CommonResponse GetEmergencyContact(string id)
         {
             CommonResponse commonResponse = new CommonResponse();
@@ -117,7 +116,6 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
-
         public CommonResponse AddEmergencyContact(EmergencyContactViewModel emergencyContact)
         {
             CommonResponse commonResponse = new CommonResponse();
@@ -144,7 +142,6 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
-
         public CommonResponse UpdateEmergencyContact(EmergencyContactViewModel emergencyContact)
         {
             CommonResponse commonResponse = new CommonResponse();

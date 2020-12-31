@@ -22,7 +22,7 @@
         public class MTI
         {
             public const string Login = "1";
-            public const string Get_Courses = "100";
+            public const string AddTourRegister = "2";
             public const string Get_Course = "101";
         }
     }

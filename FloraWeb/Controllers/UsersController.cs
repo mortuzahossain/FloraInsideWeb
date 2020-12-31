@@ -21,6 +21,16 @@ namespace FloraWeb.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session["UserId"] = null;
+            Session["LoginId"] = null;
+            Session["LoginName"] = null;
+            Session["UserGroupName"] = null;
+            Session["UserGroupId"] = null;
+            return RedirectToAction("Login", "Users");
+        }
 
         [ValidateAntiForgeryToken()]
         [HttpPost]
@@ -48,11 +58,10 @@ namespace FloraWeb.Controllers
             return View();
         }
 
-
         public ActionResult AddUser()
         {
             TempData["SuccessMessage"] = TempData["SuccessMessage"];
-            var commonResponse = new UsersRepository().GetAllUserGroup();
+            var commonResponse = new ParameterRepository().GetAllUserGroup();
 
             if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess && commonResponse.ResponseData != null)
             {
@@ -74,12 +83,10 @@ namespace FloraWeb.Controllers
                 TempData["SuccessMessage"] = "User added successful.";
                 return RedirectToAction("AddUser");
             }
-            loginViewModel.UserGroupList = new UsersRepository().GetAllUserGroup().ResponseData as List<UserGroup>;
+            loginViewModel.UserGroupList = new ParameterRepository().GetAllUserGroup().ResponseData as List<UserGroup>;
             TempData["ErrorMessage"] = "Failed to add user. Please try with new user id and email id.";
             return View(loginViewModel);
         }
-
-
 
     }
 }

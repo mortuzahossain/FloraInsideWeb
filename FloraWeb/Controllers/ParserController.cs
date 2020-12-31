@@ -1,5 +1,8 @@
 ﻿using System.Web.Http;
 using FloraWeb.Entity;
+using FloraWeb.Models;
+using FloraWeb.Repository;
+using Newtonsoft.Json;
 
 namespace FloraWeb.Controllers
 {
@@ -27,10 +30,12 @@ namespace FloraWeb.Controllers
                     commonResponse.ResponseUserMsg = Constants.ResponseMsg.ResponseSuccess;
                     return commonResponse;
                 case Constants.MTI.Login:
-                        return commonResponse;
+                    LoginViewModel loginViewModel = JsonConvert.DeserializeObject<LoginViewModel>(commonRequest.Data);
+                    return new UsersRepository().UsersLogin(loginViewModel);
 
-                case Constants.MTI.Get_Courses:
-                    return commonResponse;
+                case Constants.MTI.AddTourRegister:
+                    TourRegister tourRegister = JsonConvert.DeserializeObject<TourRegister>(commonRequest.Data);
+                    return new ConvinceBillRepository().AddTourInRegister(tourRegister);
                 case Constants.MTI.Get_Course:
                     return commonResponse;
 
