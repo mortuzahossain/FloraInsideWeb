@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Configuration;
 using System.Net.Mail;
 using System.Web.Configuration;
+using System.Drawing;
+using System.IO;
 
 namespace FloraWeb.Utils
 {
@@ -80,6 +82,23 @@ namespace FloraWeb.Utils
             }
         }
 
-
+        public static bool SaveByteArrayAsImage(string fullOutputPath, string base64String)
+        {
+            try
+            {
+                byte[] bytes = Convert.FromBase64String(base64String);
+                Image image;
+                using (MemoryStream ms = new MemoryStream(bytes))
+                {
+                    image = Image.FromStream(ms);
+                }
+                image.Save(fullOutputPath, System.Drawing.Imaging.ImageFormat.Png);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

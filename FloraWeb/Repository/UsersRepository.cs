@@ -5,6 +5,7 @@ using FloraWeb.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Text;
 
 namespace FloraWeb.Repository
@@ -156,14 +157,31 @@ namespace FloraWeb.Repository
         public CommonResponse UpdateUsersProfileImage(UserProfile userProfile)
         {
             CommonResponse commonResponse = new CommonResponse();
+            commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+            commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+            commonResponse.ResponseUserMsg = Constants.ResponseMsg.ResponseUserMsgFailed;
 
             try
             {
 
+                string path = System.Web.HttpContext.Current.Server.MapPath("~/ImageStorage/ProfilePics");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string filename = DateTime.Now.Ticks + ".Png";
+                if (!GeneralUtility.SaveByteArrayAsImage(filename, userProfile.Image))
+                {
+                    return commonResponse;
+                }
+
+
+
                 List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
                 {
                     new CommonKeyValueObject() {Key = "UserId", Value =  userProfile.UserId},
-                    new CommonKeyValueObject() {Key = "Image", Value = userProfile.Image}
+                    new CommonKeyValueObject() {Key = "Image", Value = filename}
                 };
 
                 commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_UserProfileImage", objects);

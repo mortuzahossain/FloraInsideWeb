@@ -36,8 +36,12 @@ namespace FloraWeb.Controllers
                 case Constants.MTI.AddTourRegister:
                     TourRegister tourRegister = JsonConvert.DeserializeObject<TourRegister>(commonRequest.Data);
                     return new ConvinceBillRepository().AddTourInRegister(tourRegister);
-                case Constants.MTI.Get_Course:
-                    return commonResponse;
+                case Constants.MTI.UpdateUsersProfile:
+                    UserProfile userProfile = JsonConvert.DeserializeObject<UserProfile>(commonRequest.Data);
+                    return new UsersRepository().UpdateUsersProfile(userProfile);
+                case Constants.MTI.UpdateUsersProfileImage:
+                    UserProfile userProfileImage = JsonConvert.DeserializeObject<UserProfile>(commonRequest.Data);
+                    return new UsersRepository().UpdateUsersProfileImage(userProfileImage);
 
                 default:
                     return commonResponse;
