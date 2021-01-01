@@ -169,7 +169,7 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
-        public CommonResponse DeactieveEmergencyContact(EmergencyContactViewModel emergencyContact)
+        public CommonResponse DeactivateEmergencyContact(EmergencyContactViewModel emergencyContact)
         {
             CommonResponse commonResponse = new CommonResponse();
 

@@ -2166,10 +2166,10 @@
     <Content Include="Views\Emergency\_EditEmergencyPartial.cshtml" />
     <Content Include="Views\Emergency\_DeleteEmergencyPartial.cshtml" />
     <Content Include="Views\Users\AddUser.cshtml" />
+    <Content Include="Views\Faq\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Faq\" />
     <Folder Include="Views\Notice\" />
   </ItemGroup>
   <ItemGroup>

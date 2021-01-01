@@ -193,7 +193,7 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
-        public CommonResponse UpdateFaqVote(string id,int vote)
+        public CommonResponse UpdateFaqVote(string id,string vote)
         {
             CommonResponse commonResponse = new CommonResponse();
 
@@ -203,7 +203,7 @@ namespace FloraWeb.Repository
                 List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
                 {
                     new CommonKeyValueObject() {Key = "Id", Value =  id},
-                    new CommonKeyValueObject() {Key = "UpVote", Value = vote.ToString()} // 1 for upvote others for downvote
+                    new CommonKeyValueObject() {Key = "UpVote", Value = vote} // 1 for upvote others for downvote
                 };
 
                 commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_FaqVote", objects); 
@@ -217,7 +217,6 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
-
 
     }
 }

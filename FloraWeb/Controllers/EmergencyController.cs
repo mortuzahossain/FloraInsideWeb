@@ -133,7 +133,7 @@ namespace FloraWeb.Controllers
             {
                 return RedirectToAction("Login", "Users");
             }
-            CommonResponse commonResponse = new EmergencyRepository().DeactieveEmergencyContact(emergencyContact);
+            CommonResponse commonResponse = new EmergencyRepository().DeactivateEmergencyContact(emergencyContact);
 
             if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
             {
