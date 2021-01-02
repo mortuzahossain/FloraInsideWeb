@@ -2137,6 +2137,7 @@
     <Content Include="Assets\plugins\summernote\summernote.min.js.map" />
     <Content Include="Assets\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.scss" />
     <Content Include="Assets\plugins\toastr\toastr.js.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

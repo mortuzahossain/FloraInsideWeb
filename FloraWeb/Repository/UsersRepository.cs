@@ -264,10 +264,13 @@ namespace FloraWeb.Repository
                 };
 
                 commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_UserPasswordByEmail", objects);
-                string subject = "Flora Inside Password Change";
-                string content = "Dear sir/mam," + Environment.NewLine + "Welcome to Flora Systems Ltd."+ Environment.NewLine + "Your new Password: [password]" + Environment.NewLine+ "Regards" + Environment.NewLine + "Flora Systems ltd";
-                content = content.Replace("[password]", password);
-                GeneralUtility.SendMail(email, subject, content);
+                if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
+                {
+                    string subject = "Flora Inside Password Change";
+                    string content = "Dear sir/mam," + Environment.NewLine + "Welcome to Flora Systems Ltd." + Environment.NewLine + "Your new Password: [password]" + Environment.NewLine + "Regards" + Environment.NewLine + "Flora Systems ltd";
+                    content = content.Replace("[password]", password);
+                    GeneralUtility.SendMail(email, subject, content);
+                }
             }
             catch (Exception exception)
             {

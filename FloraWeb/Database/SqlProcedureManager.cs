@@ -43,12 +43,13 @@ namespace FloraWeb.Database
                     {
                         commonResponse.ResponseCode = Constants.ResponseCode.ResponseSuccess;
                         commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseSuccess;
-
+                        commonResponse.ResponseUserMsg = Constants.ResponseMsg.ResponseSuccess;
                     }
                     else
                     {
                         commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
                         commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+                        commonResponse.ResponseUserMsg = Constants.ResponseMsg.ResponseFailed;
                     }
                     _cnn.Close();
                 }
@@ -57,6 +58,7 @@ namespace FloraWeb.Database
             {
                 commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
                 commonResponse.ResponseMsg = exception.Message;
+                commonResponse.ResponseUserMsg = Constants.ResponseMsg.ResponseFailed;
             }
 
             return commonResponse;

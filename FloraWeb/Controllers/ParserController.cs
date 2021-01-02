@@ -54,6 +54,29 @@ namespace FloraWeb.Controllers
                     return new UsersRepository().ForgetPassword(forgetPassword.Email);
                 case Constants.MTI.GetAllUserProfileForContactBook:
                     return new UsersRepository().GetAllUserProfileForContactBook();
+                case Constants.MTI.UploadConvince:
+                    Convince convince = JsonConvert.DeserializeObject<Convince>(commonRequest.Data);
+                    TourRegister register = new TourRegister()
+                    {
+                        ClientId = convince.clientBank,
+                        Fare = convince.fare,
+                        FromAddress = convince.fromAddress,
+                        ToAddress = convince.toAddress,
+                        UserId = convince.userId,
+                        IssueId = convince.issueId,
+                        JourneyBy = convince.journeyBy,
+                        Remarks = convince.remarks,
+                        Lan = convince.lan,
+                        Lat = convince.lat,
+                        UpOrDown = convince.upOrDown.ToString(),
+                        TDate = convince.createDtime,
+                        TerminalId = commonRequest.TerminalId
+
+                    };
+                    return new ConvinceBillRepository().AddTourInRegister(register);
+                case Constants.MTI.GetConvincesByUserId:
+                    UserParam userParam = JsonConvert.DeserializeObject<UserParam>(commonRequest.Data);
+                    return new ConvinceBillRepository().GetTourFromRegisterByUserId(userParam.UserId);
                 #endregion
 
                 #region FAQ
@@ -74,6 +97,7 @@ namespace FloraWeb.Controllers
         }
 
 
+        #region API Entity
         // Required Model Class for API
 
         class UpdateUserPassword
@@ -90,5 +114,27 @@ namespace FloraWeb.Controllers
         {
             public string Email { get; set; }
         }
+        class Convince
+        {
+            public int id { get; set; }
+            public string userId { get; set; }
+            public int upOrDown { get; set; }
+            public string issueId { get; set; }
+            public string clientBank { get; set; }
+            public string fromAddress { get; set; }
+            public string toAddress { get; set; }
+            public string journeyBy { get; set; }
+            public string fare { get; set; }
+            public string remarks { get; set; }
+            public string uploadStatus { get; set; }
+            public string createDtime { get; set; }
+            public string lat { get; set; }
+            public string lan { get; set; }
+        }
+        class UserParam
+        {
+            public string UserId { get; set; }
+        }
+        #endregion
     }
 }

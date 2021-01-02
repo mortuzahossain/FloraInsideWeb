@@ -34,6 +34,8 @@
             public const string UpdateUsersPassword = "9";
             public const string GetAllUserProfileForContactBook = "10";
             public const string ForgetUserPassword = "11";
+            public const string UploadConvince = "12";
+            public const string GetConvincesByUserId = "13";
         }
     }
 }
