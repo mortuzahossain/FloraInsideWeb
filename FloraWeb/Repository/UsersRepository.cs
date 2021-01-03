@@ -121,17 +121,17 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
-        public CommonResponse GetUserProfile(UserProfile userProfile)
+        public CommonResponse GetUserProfile(string userId)
         {
             CommonResponse commonResponse = new CommonResponse();
             SqlProcedureManager procedureManager = SqlProcedureManager.Instance();
             List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
             {
-                new CommonKeyValueObject() {Key = "UserId", Value = userProfile.UserId}
+                new CommonKeyValueObject() {Key = "UserId", Value = userId}
             };
 
             DataTable dataTable = procedureManager.ExecuteSpGetDataTable("sp_Get_UserProfile_By_UserId", objects);
-
+            UserProfile userProfile = null;
             try
             {
                 if (dataTable != null)
@@ -205,14 +205,12 @@ namespace FloraWeb.Repository
                     new CommonKeyValueObject() {Key = "BloodGroup", Value = userProfile.BloodGroup},
                     new CommonKeyValueObject() {Key = "MaritialStatus", Value = userProfile.MaritialStatus},
                     new CommonKeyValueObject() {Key = "Department", Value = userProfile.Department},
+                    new CommonKeyValueObject() {Key = "Designation", Value = userProfile.Designation},
                     new CommonKeyValueObject() {Key = "PresentAddress", Value = userProfile.PresentAddress},
                     new CommonKeyValueObject() {Key = "PermanentAddress", Value = userProfile.PermanentAddress},
                     new CommonKeyValueObject() {Key = "EmergencyContact", Value = userProfile.EmergencyContact},
-                    new CommonKeyValueObject() {Key = "Status", Value = userProfile.Status},
                     new CommonKeyValueObject() {Key = "JoiningDate", Value = userProfile.JoiningDate},
-                    new CommonKeyValueObject() {Key = "FireId", Value = userProfile.FireId},
-                    new CommonKeyValueObject() {Key = "Nid", Value = userProfile.Nid},
-                    new CommonKeyValueObject() {Key = "AccountStatus", Value = userProfile.AccountStatus}
+                    new CommonKeyValueObject() {Key = "Nid", Value = userProfile.Nid}
                 };
 
                 commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_UserProfile", objects);
@@ -296,8 +294,8 @@ namespace FloraWeb.Repository
                     Directory.CreateDirectory(path);
                 }
 
-                string filename = DateTime.Now.Ticks + ".Png";
-                if (!GeneralUtility.SaveByteArrayAsImage(filename, userProfile.Image))
+                string filename = DateTime.Now.Ticks + ".jpeg";
+                if (!GeneralUtility.SaveByteArrayAsImage(path+"/"+filename, userProfile.Image))
                 {
                     return commonResponse;
                 }
@@ -311,6 +309,7 @@ namespace FloraWeb.Repository
                 };
 
                 commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_UserProfileImage", objects);
+                commonResponse.ResponseData = filename;
 
             }
             catch (Exception exception)

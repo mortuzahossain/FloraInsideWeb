@@ -44,8 +44,8 @@ namespace FloraWeb.Controllers
                     UserProfile userProfileImage = JsonConvert.DeserializeObject<UserProfile>(commonRequest.Data);
                     return new UsersRepository().UpdateUsersProfileImage(userProfileImage);
                 case Constants.MTI.GetUserProfile:
-                    UserProfile getUserProfile = JsonConvert.DeserializeObject<UserProfile>(commonRequest.Data);
-                    return new UsersRepository().GetUserProfile(getUserProfile);
+                    UserParam getUserProfile = JsonConvert.DeserializeObject<UserParam>(commonRequest.Data);
+                    return new UsersRepository().GetUserProfile(getUserProfile.UserId);
                 case Constants.MTI.UpdateUsersPassword:
                     UpdateUserPassword updateUserPassword = JsonConvert.DeserializeObject<UpdateUserPassword>(commonRequest.Data);
                     return new UsersRepository().UpdateUsersPassword(updateUserPassword.UserId, updateUserPassword.Password);

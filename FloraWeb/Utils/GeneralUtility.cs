@@ -86,13 +86,12 @@ namespace FloraWeb.Utils
         {
             try
             {
-                byte[] bytes = Convert.FromBase64String(base64String);
-                Image image;
-                using (MemoryStream ms = new MemoryStream(bytes))
+                var bytess = Convert.FromBase64String(base64String);
+                using (var imageFile = new FileStream(fullOutputPath, FileMode.Create))
                 {
-                    image = Image.FromStream(ms);
+                    imageFile.Write(bytess, 0, bytess.Length);
+                    imageFile.Flush();
                 }
-                image.Save(fullOutputPath, System.Drawing.Imaging.ImageFormat.Png);
                 return true;
             }
             catch
