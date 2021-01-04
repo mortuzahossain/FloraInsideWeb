@@ -30,13 +30,19 @@ namespace FloraWeb.Controllers
                     commonResponse.ResponseUserMsg = Constants.ResponseMsg.ResponseSuccess;
                     return commonResponse;
 
+                #region Setup
+
+                case Constants.MTI.GetAllClient:
+                    return new ParameterRepository().GetAllClient();
+
+                #endregion
+
+
                 #region Users
                 case Constants.MTI.Login:
                     LoginViewModel loginViewModel = JsonConvert.DeserializeObject<LoginViewModel>(commonRequest.Data);
                     return new UsersRepository().UsersLogin(loginViewModel);
-                case Constants.MTI.AddTourRegister:
-                    TourRegister tourRegister = JsonConvert.DeserializeObject<TourRegister>(commonRequest.Data);
-                    return new ConvinceBillRepository().AddTourInRegister(tourRegister);
+                
                 case Constants.MTI.UpdateUsersProfile:
                     UserProfile userProfile = JsonConvert.DeserializeObject<UserProfile>(commonRequest.Data);
                     return new UsersRepository().UpdateUsersProfile(userProfile);
@@ -54,6 +60,28 @@ namespace FloraWeb.Controllers
                     return new UsersRepository().ForgetPassword(forgetPassword.Email);
                 case Constants.MTI.GetAllUserProfileForContactBook:
                     return new UsersRepository().GetAllUserProfileForContactBook();
+                
+                #endregion
+
+                #region FAQ
+                case Constants.MTI.GetAllFaq:
+                    return new FaqRepository().GetAllFaq();
+                case Constants.MTI.GetFaqById:
+                    return new FaqRepository().GetFaqById(commonRequest.Data);
+                case Constants.MTI.UpdateFaqVote:
+                    UpdateFaq updateFaq = JsonConvert.DeserializeObject<UpdateFaq>(commonRequest.Data);
+                    return new FaqRepository().UpdateFaqVote(updateFaq.Id, updateFaq.Vote);
+                #endregion
+
+                #region Emergency
+                case Constants.MTI.GetAllEmergencyContact:
+                    return new EmergencyRepository().GetAllEmergencyContact();
+                #endregion
+
+                #region Convince
+                case Constants.MTI.AddTourRegister:
+                    TourRegister tourRegister = JsonConvert.DeserializeObject<TourRegister>(commonRequest.Data);
+                    return new ConvinceBillRepository().AddTourInRegister(tourRegister);
                 case Constants.MTI.UploadConvince:
                     Convince convince = JsonConvert.DeserializeObject<Convince>(commonRequest.Data);
                     TourRegister register = new TourRegister()
@@ -77,16 +105,6 @@ namespace FloraWeb.Controllers
                 case Constants.MTI.GetConvincesByUserId:
                     UserParam userParam = JsonConvert.DeserializeObject<UserParam>(commonRequest.Data);
                     return new ConvinceBillRepository().GetTourFromRegisterByUserId(userParam.UserId);
-                #endregion
-
-                #region FAQ
-                case Constants.MTI.GetAllFaq:
-                    return new FaqRepository().GetAllFaq();
-                case Constants.MTI.GetFaqById:
-                    return new FaqRepository().GetFaqById(commonRequest.Data);
-                case Constants.MTI.UpdateFaqVote:
-                    UpdateFaq updateFaq = JsonConvert.DeserializeObject<UpdateFaq>(commonRequest.Data);
-                    return new FaqRepository().UpdateFaqVote(updateFaq.Id, updateFaq.Vote);
                 #endregion
 
                 default:

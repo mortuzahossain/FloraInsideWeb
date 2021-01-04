@@ -29,8 +29,7 @@ namespace FloraWeb.Repository
                                 Name = dataTable.Rows[i]["Name"].ToString().Trim(),
                                 Descriptions = dataTable.Rows[i]["Descriptions"].ToString().Trim(),
                                 DisplayName = dataTable.Rows[i]["DisplayName"].ToString(),
-                                ContactNumber = dataTable.Rows[i]["ContactNumber"].ToString().Trim(),
-
+                                ContactNumber = dataTable.Rows[i]["ContactNumber"].ToString().Trim()
                             };
                             emergencyContacts.Add(emergencyContact);
                         }

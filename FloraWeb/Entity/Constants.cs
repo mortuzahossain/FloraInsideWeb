@@ -36,6 +36,8 @@
             public const string ForgetUserPassword = "11";
             public const string UploadConvince = "12";
             public const string GetConvincesByUserId = "13";
+            public const string GetAllEmergencyContact = "14";
+            public const string GetAllClient = "15";
         }
     }
 }
