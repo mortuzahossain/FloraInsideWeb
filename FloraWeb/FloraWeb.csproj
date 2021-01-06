@@ -157,6 +157,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ClientDuetyController.cs" />
     <Compile Include="Controllers\ClientTypeController.cs" />
     <Compile Include="Controllers\EmergencyController.cs" />
     <Compile Include="Controllers\FaqController.cs" />
@@ -2171,6 +2172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ClientDuety\" />
     <Folder Include="Views\Notice\" />
   </ItemGroup>
   <ItemGroup>
@@ -2211,6 +2213,12 @@
     <TypeScriptCompile Include="Assets\plugins\fullcalendar-interaction\main.d.ts" />
     <TypeScriptCompile Include="Assets\plugins\fullcalendar-timegrid\main.d.ts" />
     <TypeScriptCompile Include="Assets\plugins\fullcalendar\main.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\plugins\ExcelFileManager\ExcelFileManager.csproj">
+      <Project>{3629eecc-2f8a-4265-90f2-1da0ec06afdf}</Project>
+      <Name>ExcelFileManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

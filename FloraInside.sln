@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloraWeb", "FloraWeb\FloraWeb.csproj", "{D53CED96-D4EE-40A4-9F35-99ADF95B0430}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelFileManager", "plugins\ExcelFileManager\ExcelFileManager.csproj", "{3629EECC-2F8A-4265-90F2-1DA0EC06AFDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D53CED96-D4EE-40A4-9F35-99ADF95B0430}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D53CED96-D4EE-40A4-9F35-99ADF95B0430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D53CED96-D4EE-40A4-9F35-99ADF95B0430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3629EECC-2F8A-4265-90F2-1DA0EC06AFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3629EECC-2F8A-4265-90F2-1DA0EC06AFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3629EECC-2F8A-4265-90F2-1DA0EC06AFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3629EECC-2F8A-4265-90F2-1DA0EC06AFDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

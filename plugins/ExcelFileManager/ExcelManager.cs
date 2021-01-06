@@ -9,12 +9,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using GlobalEntities.Entities;
-using static GlobalEntities.Enums.GlobalEnums;
 using OfficeOpenXml.Style;
 
 namespace ExcelFileManager
 {
+
     public static class ExcelManager
     {
         public static void CreateExcel()
@@ -59,9 +58,7 @@ namespace ExcelFileManager
 
           //  MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xlsx");
         }
-
-
-        public static MemoryStream DataTableToExcelXlsx(System.Data.DataTable table, string sheetName, ReportPrintCommon reportPrintCommon)
+        public static MemoryStream DataTableToExcelXlsx(System.Data.DataTable table, string sheetName, ReportParam reportParam)
         {
             MemoryStream Result = new MemoryStream();
             ExcelPackage pack = new ExcelPackage();
@@ -75,84 +72,91 @@ namespace ExcelFileManager
             Int32 col = 1;
             Int32 row = 1;
 
-            if (reportPrintCommon != null)
-            {
+            //if (reportPrintCommon != null)
+            //{
                 string headerTable = string.Empty;
-                if (table != null)
+            if (table != null)
+            {
+                if (table.Rows.Count > 0)
                 {
-                    if (table.Rows.Count > 0)
+
+                    ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
+                    ws.Cells[row, 1, row, table.Columns.Count].Value = "FLORA SYSTEMS LIMITED";
+                    ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    row = row + 1;
+
+                    ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
+                    ws.Cells[row, 1, row, table.Columns.Count].Value = "CONVEYANCE BILL";
+                    ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    row = row + 1;
+
+                    //Name
+                    if (!string.IsNullOrEmpty(reportParam.Name))
                     {
-
-                        //BankName
                         ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportPrintCommon.BankName.Trim();
-                        ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                        row = row + 1;
-
-                        //Branch Name
-                        ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportPrintCommon.BranchName.Trim();
-                        ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                        row = row + 1;
-
-                        //Report Title
-                        ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportPrintCommon.ReportTitle.Trim();
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportParam.Name.Trim();
                         ws.Cells[row, 1, row, table.Columns.Count].Style.Font.Bold = true;
                         ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         row = row + 1;
-
-                        if (!string.IsNullOrEmpty(reportPrintCommon.ReportSubTitle))
-                        {
-                            //Report Sub Title
-                            ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                            ws.Cells[row, 1, row, table.Columns.Count].Value = reportPrintCommon.ReportSubTitle.Trim();
-                            ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                            row = row + 1;
-                        }
-
-
-                        if (reportPrintCommon.ReportFormDetails != null)
-                        {
-                            if (reportPrintCommon.ReportFormDetails.Count > 0)
-                            {
-                                for (int i = 0; i < reportPrintCommon.ReportFormDetails.Count; i++)
-                                {
-                                    if (reportPrintCommon.ReportFormDetails[i].UserInputValue != "")
-                                    {
-                                        if ((reportPrintCommon.ReportFormDetails[i].ControlTypeId == (int)FieldType.Dropdown) || (reportPrintCommon.ReportFormDetails[i].ControlTypeId == (int)FieldType.EmbededCheckBox))
-                                        {
-                                            ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                                            ws.Cells[row, 1, row, table.Columns.Count].Value = reportPrintCommon.ReportFormDetails[i].DisplayName.Trim() + " : " + reportPrintCommon.ReportFormDetails[i].UserInputValueName.Trim();
-                                            ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                                            row = row + 1;
-                                        }
-                                        else
-                                        {
-                                            ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                                            ws.Cells[row, 1, row, table.Columns.Count].Value = reportPrintCommon.ReportFormDetails[i].DisplayName.Trim() + " : " + reportPrintCommon.ReportFormDetails[i].UserInputValue.Trim();
-                                            ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                                            row = row + 1;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        //Report Print Date
+                    }
+                    if (!string.IsNullOrEmpty(reportParam.Designation))
+                    {
+                        //Report Sub Title
                         ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = "Print Date: " + reportPrintCommon.ReportPrintDate;
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportParam.Designation.Trim();
                         ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         row = row + 1;
-
                     }
-                    else
+                    if (!string.IsNullOrEmpty(reportParam.Department))
                     {
-                        ws.Cells[row, 1, row, 8].Merge = true;
-                        ws.Cells[row, 1, row, 8].Value = "No data found";
-                        ws.Cells[row, 1, row, 8].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //Report Sub Title
+                        ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportParam.Department.Trim();
+                        ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         row = row + 1;
                     }
+                    if (!string.IsNullOrEmpty(reportParam.GenerationDate))
+                    {
+                        //Report Sub Title
+                        ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportParam.GenerationDate.Trim();
+                        ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        row = row + 1;
+                    }
+
+                    //if (reportPrintCommon.ReportFormDetails != null)
+                    //{
+                    //    if (reportPrintCommon.ReportFormDetails.Count > 0)
+                    //    {
+                    //        for (int i = 0; i < reportPrintCommon.ReportFormDetails.Count; i++)
+                    //        {
+                    //            if (reportPrintCommon.ReportFormDetails[i].UserInputValue != "")
+                    //            {
+                    //                //if ((reportPrintCommon.ReportFormDetails[i].ControlTypeId == (int)FieldType.Dropdown) || (reportPrintCommon.ReportFormDetails[i].ControlTypeId == (int)FieldType.EmbededCheckBox))
+                    //                //{
+                    //                //    ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
+                    //                //    ws.Cells[row, 1, row, table.Columns.Count].Value = reportPrintCommon.ReportFormDetails[i].DisplayName.Trim() + " : " + reportPrintCommon.ReportFormDetails[i].UserInputValueName.Trim();
+                    //                //    ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    //                //    row = row + 1;
+                    //                //}
+                    //                //else
+                    //                //{
+                    //                    ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
+                    //                    ws.Cells[row, 1, row, table.Columns.Count].Value = reportPrintCommon.ReportFormDetails[i].DisplayName.Trim() + " : " + reportPrintCommon.ReportFormDetails[i].UserInputValue.Trim();
+                    //                    ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    //                    row = row + 1;
+                    //                //}
+                    //            }
+                    //        }
+                    //    }
+                    //}
+
+                    //Report Print Date
+                    //ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
+                    //ws.Cells[row, 1, row, table.Columns.Count].Value = "Generated Date: " + reportPrintCommon.ReportPrintDate;
+                    //ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    //row = row + 1;
+
                 }
                 else
                 {
@@ -161,9 +165,17 @@ namespace ExcelFileManager
                     ws.Cells[row, 1, row, 8].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     row = row + 1;
                 }
+            }
+            else
+            {
+                ws.Cells[row, 1, row, 8].Merge = true;
+                ws.Cells[row, 1, row, 8].Value = "No data found";
+                ws.Cells[row, 1, row, 8].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                row = row + 1;
+            }
 
                 //HttpContext.Current.Response.Write("<br><br>");
-            }
+            //}
 
              
             #endregion
@@ -229,14 +241,10 @@ namespace ExcelFileManager
             pack.SaveAs(Result);
             return Result;
         }
-        public static void ExportToExcel(ref string repley, string fileName, System.Data.DataTable dt, ReportPrintCommon reportPrintCommon)
+        public static void ExportToExcel(ref string repley, string fileName, System.Data.DataTable dt, ReportParam reportParam)
         {
 
-
-           
-
-
-            MemoryStream ms = DataTableToExcelXlsx(dt, "Sheet1", reportPrintCommon);
+            MemoryStream ms = DataTableToExcelXlsx(dt, "Sheet1", reportParam);
             ms.WriteTo(HttpContext.Current.Response.OutputStream);
             HttpContext.Current.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=" + fileName+".xlsx");
@@ -358,4 +366,5 @@ namespace ExcelFileManager
         //}
 
     }
+
 }

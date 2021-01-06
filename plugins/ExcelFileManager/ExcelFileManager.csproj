@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="ExcelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
