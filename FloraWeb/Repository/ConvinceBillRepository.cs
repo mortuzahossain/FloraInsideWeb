@@ -107,5 +107,50 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
+
+        public CommonResponse GetTourFromRegisterByUserIdAndDateRange(string userId, string startingDate, string endingDate)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+            SqlProcedureManager procedureManager = SqlProcedureManager.Instance();
+            List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+            {
+                new CommonKeyValueObject() {Key = "UserId", Value = userId},
+                new CommonKeyValueObject() {Key = "EndingDate", Value = endingDate},
+                new CommonKeyValueObject() {Key = "StartDate", Value = startingDate}
+            };
+            DataTable dataTable = procedureManager.ExecuteSpGetDataTable("sp_Get_Conv_TourRegister_ByIdAndDateRange", objects);
+            try
+            {
+                if (dataTable != null)
+                {
+                    if (dataTable.Rows.Count > 0)
+                    {
+
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseSuccess;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseSuccess;
+                        commonResponse.ResponseData = dataTable;
+
+                    }
+                    else
+                    {
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+
+                    }
+                }
+                else
+                {
+                    commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                    commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+                }
+            }
+            catch (Exception ex)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = ex.Message;
+            }
+
+            return commonResponse;
+        }
     }
 }

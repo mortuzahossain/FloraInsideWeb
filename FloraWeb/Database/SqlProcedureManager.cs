@@ -87,8 +87,9 @@ namespace FloraWeb.Database
                     sqlDataAdapter.Fill(dataTable);
                     _cnn.Close();
                 }
-                catch
+                catch(Exception exception)
                 {
+                    throw;
                 }
 
                 return dataTable;

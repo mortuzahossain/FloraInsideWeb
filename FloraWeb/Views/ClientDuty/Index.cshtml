@@ -1,0 +1,63 @@
+﻿@model FloraWeb.Models.ClientDutyViewModel
+
+@{
+    ViewBag.Title = "Generate Convince";
+    Layout = "~/Views/Shared/_LHome.cshtml";
+}
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">@ViewBag.Title</h3>
+                    </div>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "quickForm" }))
+                    {
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Date range:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control float-right" name="DateRange" id="reservation">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    }
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/plugins/daterangepicker/daterangepicker.css">
+}
+@section Scripts {
+
+    <script src="~/Assets/plugins/moment/moment.min.js"></script>
+    <script src="~/Assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#reservation').daterangepicker();
+        })
+    </script>
+}
+
+
+

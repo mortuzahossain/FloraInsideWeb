@@ -1,13 +1,8 @@
-﻿using Microsoft.Office.Interop.Excel;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using System;
 using System.Data;
-using System.Collections.Generic; 
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using OfficeOpenXml.Style;
 
@@ -90,36 +85,32 @@ namespace ExcelFileManager
                     ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     row = row + 1;
 
-                    //Name
                     if (!string.IsNullOrEmpty(reportParam.Name))
                     {
                         ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportParam.Name.Trim();
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = "Name: "+reportParam.Name.Trim();
                         ws.Cells[row, 1, row, table.Columns.Count].Style.Font.Bold = true;
                         ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         row = row + 1;
                     }
                     if (!string.IsNullOrEmpty(reportParam.Designation))
                     {
-                        //Report Sub Title
                         ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportParam.Designation.Trim();
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = "Designation: " + reportParam.Designation.Trim();
                         ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         row = row + 1;
                     }
                     if (!string.IsNullOrEmpty(reportParam.Department))
                     {
-                        //Report Sub Title
                         ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportParam.Department.Trim();
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = "Department: " + reportParam.Department.Trim();
                         ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         row = row + 1;
                     }
                     if (!string.IsNullOrEmpty(reportParam.GenerationDate))
                     {
-                        //Report Sub Title
                         ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = reportParam.GenerationDate.Trim();
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = "Date: " + reportParam.GenerationDate.Trim();
                         ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         row = row + 1;
                     }
@@ -234,6 +225,26 @@ namespace ExcelFileManager
             #endregion
 
             #region Report Footer
+            col = 1;
+            row = row + 2;
+            ws.Cells[row, table.Columns.Count - 1].Style.Font.Bold = true;
+            ws.Cells[row, table.Columns.Count - 1].Value = "Signature : ";
+            //ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            row = row + 2;
+            ws.Cells[row, 1].Value = "Received By";
+            ws.Cells[row, 1].Style.Font.Bold = true;
+
+            ws.Cells[row, 2].Value = "Checked By";
+            ws.Cells[row, 2].Style.Font.Bold = true;
+
+            ws.Cells[row, 3].Value = "Certified By";
+            ws.Cells[row, 3].Style.Font.Bold = true;
+
+            ws.Cells[row, 4].Value = "Approved By";
+            ws.Cells[row, 4].Style.Font.Bold = true;
+
+
 
             #endregion
 
@@ -241,7 +252,7 @@ namespace ExcelFileManager
             pack.SaveAs(Result);
             return Result;
         }
-        public static void ExportToExcel(ref string repley, string fileName, System.Data.DataTable dt, ReportParam reportParam)
+        public static void ExportToExcel(string fileName, System.Data.DataTable dt, ReportParam reportParam)
         {
 
             MemoryStream ms = DataTableToExcelXlsx(dt, "Sheet1", reportParam);

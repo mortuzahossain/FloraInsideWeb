@@ -157,7 +157,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\ClientDuetyController.cs" />
+    <Compile Include="Controllers\ClientDutyController.cs" />
     <Compile Include="Controllers\ClientTypeController.cs" />
     <Compile Include="Controllers\EmergencyController.cs" />
     <Compile Include="Controllers\FaqController.cs" />
@@ -183,6 +183,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClientDutyViewModel.cs" />
     <Compile Include="Models\EmergencyContactViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\UserLogin.cs" />
@@ -2169,10 +2170,10 @@
     <Content Include="Views\Emergency\_DeleteEmergencyPartial.cshtml" />
     <Content Include="Views\Users\AddUser.cshtml" />
     <Content Include="Views\Faq\Create.cshtml" />
+    <Content Include="Views\ClientDuty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ClientDuety\" />
     <Folder Include="Views\Notice\" />
   </ItemGroup>
   <ItemGroup>
