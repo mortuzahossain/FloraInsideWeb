@@ -61,7 +61,7 @@ namespace ExcelFileManager
             //ws.Cells[1, 1, 1, 8].Merge = true;
             //ws.Cells["A1:C1"].Merge = true;
             //ws.Cells[1, 4][1, 8].Value = "Test Marge";
-            
+
             #region Page Header
 
             Int32 col = 1;
@@ -69,7 +69,7 @@ namespace ExcelFileManager
 
             //if (reportPrintCommon != null)
             //{
-                string headerTable = string.Empty;
+            string headerTable = string.Empty;
             if (table != null)
             {
                 if (table.Rows.Count > 0)
@@ -88,7 +88,7 @@ namespace ExcelFileManager
                     if (!string.IsNullOrEmpty(reportParam.Name))
                     {
                         ws.Cells[row, 1, row, table.Columns.Count].Merge = true;
-                        ws.Cells[row, 1, row, table.Columns.Count].Value = "Name: "+reportParam.Name.Trim();
+                        ws.Cells[row, 1, row, table.Columns.Count].Value = "Name: " + reportParam.Name.Trim();
                         ws.Cells[row, 1, row, table.Columns.Count].Style.Font.Bold = true;
                         ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         row = row + 1;
@@ -165,87 +165,91 @@ namespace ExcelFileManager
                 row = row + 1;
             }
 
-                //HttpContext.Current.Response.Write("<br><br>");
+            //HttpContext.Current.Response.Write("<br><br>");
             //}
 
-             
+
             #endregion
 
             #region Report Header
-            col = 1;
-            row = row+1;
-            foreach (DataColumn column in table.Columns)
+            if (table != null)
             {
-                ws.Cells[row, col].Value = column.ColumnName.ToString();
-                ws.Cells[row, col].Style.Font.Bold = true;
-                col++;
-            }
-            #endregion
-
-            #region Report Details
-            col = 1;
-            row = row+1;
-            foreach (DataRow rw in table.Rows)
-            {
-                foreach (DataColumn cl in table.Columns)
+                col = 1;
+                row = row + 1;
+                foreach (DataColumn column in table.Columns)
                 {
-                    if (rw[cl.ColumnName] != DBNull.Value)
+                    ws.Cells[row, col].Value = column.ColumnName.ToString();
+                    ws.Cells[row, col].Style.Font.Bold = true;
+                    col++;
+                }
+                #endregion
+
+                #region Report Details
+                col = 1;
+                row = row + 1;
+                foreach (DataRow rw in table.Rows)
+                {
+                    foreach (DataColumn cl in table.Columns)
                     {
-                        if (cl.DataType.Name.ToUpper() == "DECIMAL")
+                        if (rw[cl.ColumnName] != DBNull.Value)
                         {
-                            Double amt = 0;
-                            amt = Double.Parse(rw[cl.ColumnName].ToString());
-                            if (amt == 0)
+                            if (cl.DataType.Name.ToUpper() == "DECIMAL")
                             {
-                                ws.Cells[row, col].Value = 0.00;
+                                Double amt = 0;
+                                amt = Double.Parse(rw[cl.ColumnName].ToString());
+                                if (amt == 0)
+                                {
+                                    ws.Cells[row, col].Value = 0.00;
+                                }
+                                else
+                                {
+                                    ws.Cells[row, col].Value = amt;
+                                    ws.Cells[row, col].Style.Numberformat.Format = "###,###,##,###,##.00";
+                                }
+                            }
+                            else if (cl.DataType.Name.ToUpper() == "INT32")
+                            {
+                                Int64 amt = 0;
+                                amt = Int64.Parse(rw[cl.ColumnName].ToString());
+                                ws.Cells[row, col].Value = amt;
+                                ws.Cells[row, col].Style.Numberformat.Format = "######";
                             }
                             else
                             {
-                                ws.Cells[row, col].Value = amt;
-                                ws.Cells[row, col].Style.Numberformat.Format = "###,###,##,###,##.00";
+                                ws.Cells[row, col].Value = rw[cl.ColumnName].ToString();
                             }
                         }
-                        else if (cl.DataType.Name.ToUpper() == "INT32")
-                        {
-                            Int64 amt = 0;
-                            amt = Int64.Parse(rw[cl.ColumnName].ToString());
-                            ws.Cells[row, col].Value = amt;
-                            ws.Cells[row, col].Style.Numberformat.Format = "######";
-                        }
-                        else
-                        {
-                            ws.Cells[row, col].Value = rw[cl.ColumnName].ToString();
-                        }
+                        col++;
                     }
-                    col++;
+                    row++;
+                    col = 1;
                 }
-                row++;
+
+                #endregion
+
+                #region Report Footer
                 col = 1;
+                row = row + 2;
+                ws.Cells[row, table.Columns.Count - 1].Style.Font.Bold = true;
+                ws.Cells[row, table.Columns.Count - 1].Value = "Signature : ";
+                //ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                row = row + 2;
+                ws.Cells[row, 1].Value = "Received By";
+                ws.Cells[row, 1].Style.Font.Bold = true;
+
+                ws.Cells[row, 2].Value = "Checked By";
+                ws.Cells[row, 2].Style.Font.Bold = true;
+
+                ws.Cells[row, 3].Value = "Certified By";
+                ws.Cells[row, 3].Style.Font.Bold = true;
+
+                ws.Cells[row, 4].Value = "Approved By";
+                ws.Cells[row, 4].Style.Font.Bold = true;
+
+
+
             }
-            #endregion
-
-            #region Report Footer
-            col = 1;
-            row = row + 2;
-            ws.Cells[row, table.Columns.Count - 1].Style.Font.Bold = true;
-            ws.Cells[row, table.Columns.Count - 1].Value = "Signature : ";
-            //ws.Cells[row, 1, row, table.Columns.Count].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-
-            row = row + 2;
-            ws.Cells[row, 1].Value = "Received By";
-            ws.Cells[row, 1].Style.Font.Bold = true;
-
-            ws.Cells[row, 2].Value = "Checked By";
-            ws.Cells[row, 2].Style.Font.Bold = true;
-
-            ws.Cells[row, 3].Value = "Certified By";
-            ws.Cells[row, 3].Style.Font.Bold = true;
-
-            ws.Cells[row, 4].Value = "Approved By";
-            ws.Cells[row, 4].Style.Font.Bold = true;
-
-
-
             #endregion
 
 

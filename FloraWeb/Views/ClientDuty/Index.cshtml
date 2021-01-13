@@ -54,7 +54,11 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#reservation').daterangepicker();
+            $('#reservation').daterangepicker({
+                locale: {
+                    format: 'DD/MMM/YYYY'
+                }
+            });
         })
     </script>
 }
