@@ -1,0 +1,110 @@
+﻿@model IEnumerable<FloraWeb.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "All Users";
+    Layout = "~/Views/Shared/_LHome.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">@ViewBag.Title</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                                        <thead>
+                                            <tr>
+                                                <th>Login Id</th>
+                                                <th>Login Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+
+                                                foreach (var item in Model)
+                                                {
+
+                                                    <tr role="row">
+                                                        <td>@item.LoginId</td>
+                                                        <td>@item.LoginName</td>
+                                                    </tr>
+
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+}
+@section Scripts {
+
+    <script src="~/Assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // $('.edit-emergency').click(function () {
+            //    var url = "/Emergency/Edit"; // the url to the controller
+            //    var id = $(this).attr('data-id'); // the id that's given to each button in the list
+            //    $.get(url + '/' + id, function (data) {
+            //        $('#modal-lg').html(data);
+            //        $('#modal-lg').modal('show');
+            //    });
+            //});
+
+            // $('.delete-emergency').click(function () {
+            //    var url = "/Emergency/Delete"; // the url to the controller
+            //    var id = $(this).attr('data-id'); // the id that's given to each button in the list
+            //    $.get(url + '/' + id, function (data) {
+            //        $('#modal-danger').html(data);
+            //        $('#modal-danger').modal('show');
+            //    });
+            //});
+
+
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+
+            @*var errorMessage = '@errorMessage';
+            if (errorMessage)
+                toastr.error(errorMessage);
+
+            var successMessage = '@successMessage';
+            if (successMessage)
+                toastr.success(successMessage);*@
+
+        });
+    </script>
+}

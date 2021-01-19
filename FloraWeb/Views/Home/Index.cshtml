@@ -18,6 +18,8 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
+            @if (@Session["UserGroupId"].ToString() == "1")
+        {
             <div class="col-md-3 col-sm-6 col-12">
                 <div class="info-box bg-gradient-info">
                     <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
@@ -97,7 +99,26 @@
                 </div>
                 <!-- /.info-box -->
             </div>
-            <!-- /.col -->
+            }
+        else
+        {
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>Generate</h3>
+                        <p>Convince</p>
+
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <a href="/ClientDuty" class="small-box-footer">
+                        GO <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            }
         </div>
     </div><!-- /.container-fluid -->
 </div>

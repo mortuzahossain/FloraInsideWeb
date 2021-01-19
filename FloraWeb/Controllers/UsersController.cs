@@ -88,5 +88,20 @@ namespace FloraWeb.Controllers
             return View(loginViewModel);
         }
 
+        [HttpGet]
+        public ActionResult ShowAllUsers()
+        {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+            var commonResponse = new UsersRepository().GetAllUsers();
+            if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess && commonResponse.ResponseData != null)
+            {
+                return View(commonResponse.ResponseData);
+            }
+            return View();
+        }
+
     }
 }

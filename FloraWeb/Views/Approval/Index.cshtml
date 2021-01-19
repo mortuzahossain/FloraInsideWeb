@@ -1,0 +1,185 @@
+﻿@model FloraWeb.Models.ApprovalViewModel
+
+
+@{
+    ViewBag.Title = "Approval Panel";
+    Layout = "~/Views/Shared/_LHome.cshtml";
+    var errorMessage = TempData["ErrorMessage"] ?? string.Empty;
+    var successMessage = TempData["SuccessMessage"] ?? string.Empty;
+}
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">@ViewBag.Title</h3>
+                    </div>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "quickForm" }))
+                    {
+                        <div class="card-body">
+
+
+                            <div class="form-group">
+                                <label>Month</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                    <input type="month" id="Month" name="Month">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="UserId">User Name</label>
+                                @Html.DropDownList("UserId", new SelectList(Model.UserList, "UserId", "LoginName"), new { @class = "form-control select2" })
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+
+                    }
+                </div>
+
+
+
+
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</div>
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-body">
+                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>By</th>
+                                                <th>Fare</th>
+                                                <th>Remarks</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.tourRegisters != null)
+                                            {
+
+                                                foreach (var item in Model.tourRegisters)
+                                                {
+
+                                                    <tr role="row">
+                                                        <td>@item.Date</td>
+                                                        <td>@item.From</td>
+                                                        <td>@item.To</td>
+                                                        <td>@item.By</td>
+                                                        <td>@item.Fare</td>
+                                                        <td>@item.Remarks</td>
+                                                        <td class="text-center">
+                                                            <button type="button" class="btn btn-default edit-convience" data-toggle="modal" data-target="#modal-lg" data-id="@item.Id"><i class="fas fa-edit"></i></button>
+                                                            @*<button type="button" class="btn btn-default delete-emergency" data-toggle="modal" data-target="#modal-danger" data-id="@item.Id"><i class="fas fa-trash-alt"></i></button>*@
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg">
+
+    </div>
+</div>
+
+
+
+@section Styles{
+    <link rel="stylesheet" href="~/Assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/Assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    }
+
+
+    @section Scripts {
+
+        <script src="~/Assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="~/Assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="~/Assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="~/Assets/plugins/select2/js/select2.full.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.select2').select2({
+                theme: 'bootstrap4'
+            });
+
+
+             $('.edit-convience').click(function () {
+                var url = "/Approval/Edit";
+                var id = $(this).attr('data-id');
+                $.get(url + '/' + id, function (data) {
+                    $('#modal-lg').html(data);
+                    $('#modal-lg').modal('show');
+                });
+            });
+
+
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+
+            var errorMessage = '@errorMessage';
+            if (errorMessage)
+                toastr.error(errorMessage);
+
+            var successMessage = '@successMessage';
+            if (successMessage)
+                toastr.success(successMessage);
+
+        });
+        </script>
+    }
+
+
+

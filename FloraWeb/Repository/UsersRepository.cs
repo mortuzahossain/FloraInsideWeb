@@ -103,7 +103,7 @@ namespace FloraWeb.Repository
                 // Send password using email
                 if(commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
                 {
-                    string subject = "Flora Inside Login Credentials";
+                    string subject = "FloraERP Login Credentials";
                     string content = "Dear [name],"+Environment.NewLine+ "Welcome to Flora Systems Ltd.Your login credential:" + Environment.NewLine + "Login Id: [loginid]" + Environment.NewLine + "Password: [password]" + Environment.NewLine + "Regards" + Environment.NewLine + "Flora Systems ltd";
                     content = content.Replace("[name]", userLogin.LoginName);
                     content = content.Replace("[loginid]", userLogin.LoginId);
@@ -264,7 +264,7 @@ namespace FloraWeb.Repository
                 commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_UserPasswordByEmail", objects);
                 if (commonResponse.ResponseCode == Constants.ResponseCode.ResponseSuccess)
                 {
-                    string subject = "Flora Inside Password Change";
+                    string subject = "FloraERP Password Change";
                     string content = "Dear sir/mam," + Environment.NewLine + "Welcome to Flora Systems Ltd." + Environment.NewLine + "Your new Password: [password]" + Environment.NewLine + "Regards" + Environment.NewLine + "Flora Systems ltd";
                     content = content.Replace("[password]", password);
                     GeneralUtility.SendMail(email, subject, content);
@@ -353,6 +353,57 @@ namespace FloraWeb.Repository
                                 FireId = dataTable.Rows[i]["FireId"].ToString().Trim(),
                                 Nid = dataTable.Rows[i]["Nid"].ToString().Trim(),
                                 AccountStatus = dataTable.Rows[i]["AccountStatus"].ToString().Trim(),
+                            };
+                            userProfiles.Add(userProfile);
+                        }
+
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseSuccess;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseSuccess;
+                        commonResponse.ResponseData = userProfiles;
+
+                    }
+                    else
+                    {
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+
+                    }
+                }
+                else
+                {
+                    commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                    commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+                }
+            }
+            catch (Exception ex)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = ex.Message;
+            }
+
+            return commonResponse;
+        }
+
+        public CommonResponse GetAllUsers()
+        {
+            CommonResponse commonResponse = new CommonResponse();
+            SqlProcedureManager procedureManager = SqlProcedureManager.Instance();
+            DataTable dataTable = procedureManager.ExecuteSpGetDataTable("sp_Get_AllUsers");
+            var userProfiles = new List<UserViewModel>();
+            try
+            {
+                if (dataTable != null)
+                {
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            UserViewModel userProfile = new UserViewModel()
+                            {
+                                UserId = dataTable.Rows[i]["UserId"].ToString().Trim(),
+                                LoginId = dataTable.Rows[i]["LoginId"].ToString().Trim(),
+                                LoginName = dataTable.Rows[i]["LoginName"].ToString().Trim(),
+                                UserGroupId = dataTable.Rows[i]["UserGroupId"].ToString().Trim()
                             };
                             userProfiles.Add(userProfile);
                         }

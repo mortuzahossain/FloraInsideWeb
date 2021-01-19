@@ -1,5 +1,6 @@
 ﻿using FloraWeb.Database;
 using FloraWeb.Entity;
+using FloraWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -129,6 +130,67 @@ namespace FloraWeb.Repository
                         commonResponse.ResponseCode = Constants.ResponseCode.ResponseSuccess;
                         commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseSuccess;
                         commonResponse.ResponseData = dataTable;
+
+                    }
+                    else
+                    {
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+
+                    }
+                }
+                else
+                {
+                    commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                    commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+                }
+            }
+            catch (Exception ex)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = ex.Message;
+            }
+
+            return commonResponse;
+        }
+
+        public CommonResponse GetTourFromRegisterForApprovalByUserIdAndMonth(string userId, string Month,string Year)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+            SqlProcedureManager procedureManager = SqlProcedureManager.Instance();
+            List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+            {
+                new CommonKeyValueObject() {Key = "UserId", Value = userId},
+                new CommonKeyValueObject() {Key = "Month", Value = Month},
+                new CommonKeyValueObject() {Key = "Year", Value = Year},
+            };
+            DataTable dataTable = procedureManager.ExecuteSpGetDataTable("sp_Get_Conv_TourRegister_ForApproval_By_Id_Month", objects);
+            try
+            {
+                List<TourRegisterItem> tourRegisterItems = new List<TourRegisterItem>();
+
+                if (dataTable != null)
+                {
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            TourRegisterItem model = new TourRegisterItem()
+                            {
+                                Id = dataTable.Rows[i]["Id"].ToString().Trim(),
+                                Date = dataTable.Rows[i]["TDate"].ToString().Trim(),
+                                From = dataTable.Rows[i]["FromAddress"].ToString().Trim(),
+                                To = dataTable.Rows[i]["ToAddress"].ToString(),
+                                By = dataTable.Rows[i]["JourneyBy"].ToString().Trim(),
+                                Fare = dataTable.Rows[i]["Fare"].ToString().Trim(),
+                                Remarks = dataTable.Rows[i]["Remarks"].ToString().Trim()
+                            };
+                            tourRegisterItems.Add(model);
+                        }
+
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseSuccess;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseSuccess;
+                        commonResponse.ResponseData = tourRegisterItems;
 
                     }
                     else

@@ -9,6 +9,7 @@ namespace FloraWeb.Models
 {
     public class UserViewModel
     {
+        public string UserId { get; set; }
         [Required]
         public string LoginId { get; set; }
         [Required]

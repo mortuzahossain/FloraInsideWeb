@@ -81,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         @if (@Session["UserGroupId"].ToString() == "1")
                         {
-                            <li class="nav-item has-treeview">
+                            @*<li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>
@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>*@
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-chart-pie"></i>
@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="/Users" class="nav-link">
+                                        <a href="/Users/ShowAllUsers" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>All Users</p>
                                         </a>
@@ -139,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item has-treeview">
+                            @*<li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-tree"></i>
                                     <p>
@@ -195,7 +195,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>*@
                         }
 
                         <li class="nav-item has-treeview">
