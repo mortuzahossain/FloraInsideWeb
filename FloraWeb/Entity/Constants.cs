@@ -38,6 +38,7 @@
             public const string GetConvincesByUserId = "13";
             public const string GetAllEmergencyContact = "14";
             public const string GetAllClient = "15";
+            public const string UpdateInstanceLocation = "16";
         }
     }
 }

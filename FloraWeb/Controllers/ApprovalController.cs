@@ -14,6 +14,10 @@ namespace FloraWeb.Controllers
         // GET: Approval
         public ActionResult Index()
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             var commonResponse = new UsersRepository().GetAllUsers();
             ApprovalViewModel approvalViewModel = new ApprovalViewModel()
             {
@@ -25,6 +29,10 @@ namespace FloraWeb.Controllers
         [HttpPost]
         public ActionResult Index(ApprovalViewModel approvalView)
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             string[] Month = approvalView.Month.Split(Convert.ToChar("-"));
             CommonResponse commonResponse = new ConvinceBillRepository().GetTourFromRegisterForApprovalByUserIdAndMonth(approvalView.UserId, Month[1], Month[0]);
             var userResponse = new UsersRepository().GetAllUsers();
@@ -53,6 +61,10 @@ namespace FloraWeb.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             try
             {
                 // TODO: Add insert logic here
@@ -66,30 +78,25 @@ namespace FloraWeb.Controllers
         }
 
         // GET: Approval/Edit/5
-        public ActionResult Edit(string id, TourRegisterItem tourRegisterItem)
+        public ActionResult Edit(string id)
         {
-           
-
-
-
-
-            return PartialView("_EditApprovalPartial");
+            CommonResponse commonResponse = new ConvinceBillRepository().GetTourFromRegisterForApprovalById(id);
+            return PartialView("_EditApprovalPartial", commonResponse.ResponseData as TourRegisterItem);
+            //return PartialView("_EditApprovalPartial");
         }
 
         // POST: Approval/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, TourRegisterItem collection)
         {
-            try
+            if (Session["UserId"] == null)
             {
-                // TODO: Add update logic here
+                return RedirectToAction("Login", "Users");
+            }
+            //CommonResponse commonResponse = new ConvinceBillRepository().ApproveSingleTourInRegister(id,collection);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
+
         }
 
         // GET: Approval/Delete/5

@@ -183,6 +183,7 @@ namespace FloraWeb.Repository
                                 To = dataTable.Rows[i]["ToAddress"].ToString(),
                                 By = dataTable.Rows[i]["JourneyBy"].ToString().Trim(),
                                 Fare = dataTable.Rows[i]["Fare"].ToString().Trim(),
+                                ApproveAmount = dataTable.Rows[i]["ApproveAmount"].ToString().Trim(),
                                 Remarks = dataTable.Rows[i]["Remarks"].ToString().Trim()
                             };
                             tourRegisterItems.Add(model);
@@ -210,6 +211,94 @@ namespace FloraWeb.Repository
             {
                 commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
                 commonResponse.ResponseMsg = ex.Message;
+            }
+
+            return commonResponse;
+        }
+
+        public CommonResponse GetTourFromRegisterForApprovalById(string Id)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+            SqlProcedureManager procedureManager = SqlProcedureManager.Instance();
+            List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+            {
+                new CommonKeyValueObject() {Key = "Id", Value = Id}
+            };
+            DataTable dataTable = procedureManager.ExecuteSpGetDataTable("sp_Get_Conv_TourRegister_ForApproval_By_Id", objects);
+            try
+            {
+                TourRegisterItem model = new TourRegisterItem();
+
+                if (dataTable != null)
+                {
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            model = new TourRegisterItem()
+                            {
+                                Id = dataTable.Rows[i]["Id"].ToString().Trim(),
+                                Date = dataTable.Rows[i]["TDate"].ToString().Trim(),
+                                From = dataTable.Rows[i]["FromAddress"].ToString().Trim(),
+                                To = dataTable.Rows[i]["ToAddress"].ToString(),
+                                By = dataTable.Rows[i]["JourneyBy"].ToString().Trim(),
+                                Fare = dataTable.Rows[i]["Fare"].ToString().Trim(),
+                                ApproveAmount = dataTable.Rows[i]["ApproveAmount"].ToString().Trim(),
+                                Remarks = dataTable.Rows[i]["Remarks"].ToString().Trim()
+                            };
+                        }
+
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseSuccess;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseSuccess;
+                        commonResponse.ResponseData = model;
+
+                    }
+                    else
+                    {
+                        commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                        commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+
+                    }
+                }
+                else
+                {
+                    commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                    commonResponse.ResponseMsg = Constants.ResponseMsg.ResponseFailed;
+                }
+            }
+            catch (Exception ex)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = ex.Message;
+            }
+
+            return commonResponse;
+        }
+
+
+        public CommonResponse ApproveSingleTourInRegister(string approver,TourRegisterItem tourRegister)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+
+            try
+            {
+
+                List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+                {
+                    new CommonKeyValueObject() {Key = "Id", Value = tourRegister.Id},
+                    new CommonKeyValueObject() {Key = "ApprovedAmount", Value = tourRegister.ApproveAmount},
+                    new CommonKeyValueObject() {Key = "ApprovedBy", Value = approver},
+                    new CommonKeyValueObject() {Key = "VerificationNote", Value = tourRegister.VerificationNote}
+                };
+
+                commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_Conv_TourRegisterApproveById", objects);
+
+            }
+            catch (Exception exception)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = exception.Message;
+                commonResponse.ResponseUserMsg = "Unable to upload Convince.";
             }
 
             return commonResponse;

@@ -107,6 +107,9 @@ namespace FloraWeb.Controllers
                     return new ConvinceBillRepository().GetTourFromRegisterByUserId(userParam.UserId);
                 #endregion
 
+                case Constants.MTI.UpdateInstanceLocation:
+                    UpdateInstanceLocation instanceLocation = JsonConvert.DeserializeObject<UpdateInstanceLocation>(commonRequest.Data);
+                    return new UsersRepository().InUpdateInstanceLocation(instanceLocation);
                 default:
                     return commonResponse;
             }
@@ -117,7 +120,13 @@ namespace FloraWeb.Controllers
 
         #region API Entity
         // Required Model Class for API
-
+        public class UpdateInstanceLocation
+        {
+            public string UserId { get; set; }
+            public string Lat { get; set; }
+            public string Lan { get; set; }
+            public string Status { get; set; }
+        }
         class UpdateUserPassword
         {
             public string UserId { get; set; }

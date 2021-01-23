@@ -7,37 +7,43 @@
                         UpdateTargetId = "list-of-people"
                     }, new { Class = "form-horizontal" }))
 {
-    @Html.ValidationSummary()
-    @Html.AntiForgeryToken()
 
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Emergency Contacts</h4>
+                        <h4 class="modal-title">Edit Fare</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">Name</label>
-                            <input type="text" name="Name" class="form-control col-sm-10" id="Name" placeholder="Enter Name">
+                        @*<div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">Date</label>
+                            <p class="form-control col-sm-10">@Model.Date</p>
                         </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">From</label>
+                            <p class="form-control col-sm-10">@Model.From</p>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">To</label>
+                            <p class="form-control col-sm-10">@Model.To</p>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">By</label>
+                            <p class="form-control col-sm-10">@Model.By</p>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">By</label>
+                            <p class="form-control col-sm-10">@Model.Fare</p>
+                        </div>*@
 
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">DisplayName</label>
-                            <input type="text" name="DisplayName" class="form-control col-sm-10" id="DisplayName" placeholder="Enter DisplayName">
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">ContactNumber</label>
-                            <input type="text" name="ContactNumber" class="form-control col-sm-10" id="ContactNumber" placeholder="Enter ContactNumber">
-                        </div>
+                        @*<div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">Approve Amount</label>
+                            <input type="text" name="DisplayName" class="form-control col-sm-10" id="DisplayName" placeholder="Enter DisplayName" value="@Model.Fare">
+                        </div>*@
 
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">Descriptions</label>
-                            <input type="text" name="Descriptions" class="form-control col-sm-10" id="Descriptions" placeholder="Enter Descriptions">
-                        </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

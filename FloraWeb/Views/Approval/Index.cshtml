@@ -7,7 +7,69 @@
     var errorMessage = TempData["ErrorMessage"] ?? string.Empty;
     var successMessage = TempData["SuccessMessage"] ?? string.Empty;
 }
+<script>
 
+    var vSelectedDrvId = 0;
+    var vSelectedJobId = 0;
+    var vSelectedCurrentStatus = 0;
+
+
+    function OpenEditModal(vJobId) {
+        vSelectedJobId = vJobId;
+
+           $.ajax({
+            url: '@Url.Action("JobCancel", "Job")',
+            datatype: "json",
+            type: "POST",
+            //data: {},
+            data: { JobId: vSelectedJobId, ReasonCode:101 },
+               success: function (data) {
+                
+                $('#CancelJobModal').modal('show');
+                //window.location.href = "/Job/Create";
+                //alert("Job Canceled Successfully.");
+                //GetJob();
+                //$('#CancelJobModal').modal('hide');
+            },
+            error: function (data) {
+                alert("Failed to Cancel Job");
+            }
+        });
+
+
+    };
+
+    
+    function OpenEditModal(vJobId,date,name,amount) {
+        vSelectedJobId = vJobId;
+        
+       var vAmount= document.getElementById("CreateJob_DropAddressLat").value = date;
+       var vRemarks= document.getElementById("CreateJob_DropAddressLat").value = date;
+
+           $.ajax({
+            url: '@Url.Action("JobCancel", "Job")',
+            datatype: "json",
+            type: "POST",
+            //data: {},
+            data: { JobId: vSelectedJobId,Amount:vAmount, Remarks:vRemarks },
+               success: function (data) {
+                
+                $('#CancelJobModal').modal('show');
+                //window.location.href = "/Job/Create";
+                //alert("Job Canceled Successfully.");
+                //GetJob();
+                //$('#CancelJobModal').modal('hide');
+            },
+            error: function (data) {
+                alert("Failed to Cancel Job");
+            }
+        });
+
+
+    };
+
+
+</script>
 
 <div class="content-header">
     <div class="container-fluid">
@@ -77,6 +139,7 @@
                                                 <th>To</th>
                                                 <th>By</th>
                                                 <th>Fare</th>
+                                                <th>ApproveAmount</th>
                                                 <th>Remarks</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -94,10 +157,10 @@
                                                         <td>@item.To</td>
                                                         <td>@item.By</td>
                                                         <td>@item.Fare</td>
+                                                        <td>@item.ApproveAmount</td>
                                                         <td>@item.Remarks</td>
                                                         <td class="text-center">
-                                                            <button type="button" class="btn btn-default edit-convience" data-toggle="modal" data-target="#modal-lg" data-id="@item.Id"><i class="fas fa-edit"></i></button>
-                                                            @*<button type="button" class="btn btn-default delete-emergency" data-toggle="modal" data-target="#modal-danger" data-id="@item.Id"><i class="fas fa-trash-alt"></i></button>*@
+                                                            <button type="button" class="btn btn-default" data-toggle="modal" onclick="OpenEditModal(@item.Id)"><i class="fas fa-edit"></i></button>
                                                         </td>
                                                     </tr>
 
@@ -123,19 +186,81 @@
 
 
 
-<div class="modal fade" id="modal-lg">
-    <div class="modal-dialog modal-lg">
 
+<div class="modal fade bs-example-modal-sm" tabindex="-1" id="CancelJobModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Fare</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Date</label>
+                    
+                        <p class="form-control col-sm-10" id="Date"></p>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">From</label>
+                        <p class="form-control col-sm-10" id="From"></p>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">To</label>
+                        <p class="form-control col-sm-10" id="To"></p>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">By</label>
+                        <p class="form-control col-sm-10" id="By"></p>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Fare</label>
+                        <p class="form-control col-sm-10" id="Fare"></p>
+                    </div>
+
+
+                <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Approve Amount</label>
+                        <input type="text" name="ApprovalAmount" class="form-control col-sm-10" id="ApprovalAmount" placeholder="Enter DisplayName">
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>
 
+    @*<div class="modal fade bs-example-modal-sm" tabindex="-1" id="CancelJobModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Are you sure to Cancel?</h4>
+                    </div>
+                    <div class="modal-body">
 
 
-@section Styles{
-    <link rel="stylesheet" href="~/Assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/Assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/Assets/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="~/Assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning btn-o" onclick="CancelJob()"> Cancel </button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    @section Styles{
+        <link rel="stylesheet" href="~/Assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="~/Assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="~/Assets/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="~/Assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     }
 
 
@@ -147,37 +272,12 @@
         <script src="~/Assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
         <script src="~/Assets/plugins/select2/js/select2.full.min.js"></script>
         <script type="text/javascript">
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            $('.select2').select2({
-                theme: 'bootstrap4'
-            });
-
-
-             $('.edit-convience').click(function () {
-                var url = "/Approval/Edit";
-                var id = $(this).attr('data-id');
-                $.get(url + '/' + id, function (data) {
-                    $('#modal-lg').html(data);
-                    $('#modal-lg').modal('show');
+                $('.select2').select2({
+                    theme: 'bootstrap4'
                 });
             });
-
-
-            $("#example1").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-            });
-
-            var errorMessage = '@errorMessage';
-            if (errorMessage)
-                toastr.error(errorMessage);
-
-            var successMessage = '@successMessage';
-            if (successMessage)
-                toastr.success(successMessage);
-
-        });
         </script>
     }
 

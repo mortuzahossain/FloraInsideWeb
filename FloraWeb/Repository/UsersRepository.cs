@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
+using static FloraWeb.Controllers.ParserController;
 
 namespace FloraWeb.Repository
 {
@@ -108,7 +109,7 @@ namespace FloraWeb.Repository
                     content = content.Replace("[name]", userLogin.LoginName);
                     content = content.Replace("[loginid]", userLogin.LoginId);
                     content = content.Replace("[password]", passwordPlain);
-                    GeneralUtility.SendMail(userLogin.Email, subject, content);
+                    commonResponse = GeneralUtility.SendMail(userLogin.Email, subject, content);
                 }
 
 
@@ -267,7 +268,7 @@ namespace FloraWeb.Repository
                     string subject = "FloraERP Password Change";
                     string content = "Dear sir/mam," + Environment.NewLine + "Welcome to Flora Systems Ltd." + Environment.NewLine + "Your new Password: [password]" + Environment.NewLine + "Regards" + Environment.NewLine + "Flora Systems ltd";
                     content = content.Replace("[password]", password);
-                    GeneralUtility.SendMail(email, subject, content);
+                    commonResponse = GeneralUtility.SendMail(email, subject, content);
                 }
             }
             catch (Exception exception)
@@ -430,6 +431,41 @@ namespace FloraWeb.Repository
             {
                 commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
                 commonResponse.ResponseMsg = ex.Message;
+            }
+
+            return commonResponse;
+        }
+
+        public CommonResponse InUpdateInstanceLocation(UpdateInstanceLocation instanceLocation)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+
+            try
+            {
+
+                // Generate Password
+
+                string passwordPlain = SecurityUtility.RandomString(8);
+                string password = SecurityUtility.Hash(passwordPlain);
+
+
+                // Save User Into database
+                List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+                {
+                    new CommonKeyValueObject() {Key = "UserId", Value = instanceLocation.UserId},
+                    new CommonKeyValueObject() {Key = "Lat", Value = instanceLocation.Lat},
+                    new CommonKeyValueObject() {Key = "Lan", Value = instanceLocation.Lan},
+                    new CommonKeyValueObject() {Key = "Status", Value = instanceLocation.Status}
+                };
+
+                commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_InUp_InstanceLocation", objects);
+
+
+            }
+            catch (Exception exception)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = exception.Message;
             }
 
             return commonResponse;

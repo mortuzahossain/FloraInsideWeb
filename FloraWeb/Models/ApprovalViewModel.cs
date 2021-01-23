@@ -22,6 +22,8 @@ namespace FloraWeb.Models
         public string To { get; set; }
         public string By { get; set; }
         public string Fare { get; set; }
+        public string ApproveAmount  { get; set; }
+        public string VerificationNote { get; set; }
         public string Remarks { get; set; }
     }
 }

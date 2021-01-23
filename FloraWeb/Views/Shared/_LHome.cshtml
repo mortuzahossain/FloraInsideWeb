@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>FloraInside | @ViewBag.Title</title>
+    <title>FloraERP | @ViewBag.Title</title>
     <link rel="stylesheet" href="~/Assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="~/Assets/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="~/Assets/plugins/toastr/toastr.min.css">
@@ -51,7 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <a href="/" class="brand-link">
                 <img src="~/Assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">FloraInside</span>
+                <span class="brand-text font-weight-light">FloraERP</span>
             </a>
 
 
@@ -82,40 +82,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         @if (@Session["UserGroupId"].ToString() == "1")
                         {
                             @*<li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-copy"></i>
-                                    <p>
-                                        Parameter Setup
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="/ClientType" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Client Type</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Project</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/layout/boxed.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Client</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>User Group</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>*@
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>
+                        Parameter Setup
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/ClientType" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Client Type</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Project</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/layout/boxed.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Client</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User Group</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>*@
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-chart-pie"></i>
@@ -139,63 +139,80 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </li>
                                 </ul>
                             </li>
-                            @*<li class="nav-item has-treeview">
+                            <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-tree"></i>
+                                    <i class="nav-icon fas fa-chart-pie"></i>
                                     <p>
-                                        Extras
-                                        <i class="fas fa-angle-left right"></i>
+                                        Tour Approval
+                                        <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                Emergency Contacts
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
+                                        <a href="/Approval" class="nav-link">
+                                            <i class="far fa-save nav-icon"></i>
+                                            <p>Approval</p>
                                         </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="/Emergency" class="nav-link">
-                                                    <i class="far fa-dot-circle nav-icon"></i>
-                                                    <p>All Emergency Contacts</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="/Emergency/Create" class="nav-link">
-                                                    <i class="far fa-dot-circle nav-icon"></i>
-                                                    <p>Add Emergency Contact</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                Faqs
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link">
-                                                    <i class="far fa-dot-circle nav-icon"></i>
-                                                    <p>All Faqs</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link">
-                                                    <i class="far fa-dot-circle nav-icon"></i>
-                                                    <p>Add Faq</p>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </li>
                                 </ul>
-                            </li>*@
+                            </li>
+                            @*<li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-tree"></i>
+                    <p>
+                        Extras
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Emergency Contacts
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Emergency" class="nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>All Emergency Contacts</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Emergency/Create" class="nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>Add Emergency Contact</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Faqs
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>All Faqs</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>Add Faq</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>*@
                         }
 
                         <li class="nav-item has-treeview">
@@ -213,6 +230,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <p>Generate Excel</p>
                                     </a>
                                 </li>
+
 
                             </ul>
                         </li>
