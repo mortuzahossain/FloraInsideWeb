@@ -303,5 +303,32 @@ namespace FloraWeb.Repository
 
             return commonResponse;
         }
+        public CommonResponse ApproveAllTourInRegister(string Approver, string UserId,string Month, string Year)
+        {
+            CommonResponse commonResponse = new CommonResponse();
+
+            try
+            {
+
+                List<CommonKeyValueObject> objects = new List<CommonKeyValueObject>
+                {
+                    new CommonKeyValueObject() {Key = "UserId", Value = UserId},
+                    new CommonKeyValueObject() {Key = "Month", Value = Month},
+                    new CommonKeyValueObject() {Key = "Year", Value = Year},
+                    new CommonKeyValueObject() {Key = "ApproverId", Value = Approver},
+                };
+
+                commonResponse = SqlProcedureManager.Instance().ExecuteNonSpQuery("sp_Up_ApproveAllTourByUserIdAndMonth", objects);
+
+            }
+            catch (Exception exception)
+            {
+                commonResponse.ResponseCode = Constants.ResponseCode.ResponseFailed;
+                commonResponse.ResponseMsg = exception.Message;
+                commonResponse.ResponseUserMsg = "Unable to upload Convince.";
+            }
+
+            return commonResponse;
+        }
     }
 }
